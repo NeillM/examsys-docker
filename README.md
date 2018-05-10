@@ -8,8 +8,10 @@ This repository contains Docker configuration aimed at Rogo developers to easily
 ## Quick start
 
 ```bash
-# Set up path to Moodle code
+# Set up path to Rogo code
 export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
+# Set up mysql root password
+export ROGO_DOCKER_MYSQLROOT=password
 
 # Start up containers
 docker-compose up -d
