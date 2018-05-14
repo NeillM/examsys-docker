@@ -2,6 +2,7 @@
 
 This repository contains Docker configuration aimed at Rogo developers to easily deploy a testing environment for Rogo.
 
+This should not be used on a production environment.
 ## Prerequisites
 * [Docker](https://docs.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed
 
@@ -51,3 +52,12 @@ If you wish to use memcache for session handling you will need to edit `/usr/loc
 session.save_handler = memcached
 session.save_path = "<memcached container ip address>:11211"
 ```
+
+If you wish to use Rserve as you maths engine you will need to change the following in the Rogo configuration screen:
+
+| setting | value |
+|---------|-------|
+| cfg_calc_settings : host| rserve container ip |
+| cfg_calc_settings : port |6311 |
+| cfg_calc_settings : timeout| choose a time out in seconds |
+| cfg_calc_type| Rrserve |

@@ -8,6 +8,7 @@ services:
     depends_on:
      - db
      - cache
+     - calc
     volumes:
      - "${ROGO_DOCKER_WWWROOT}:/var/www"
   db:
@@ -16,3 +17,5 @@ services:
      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
   cache:
    image: memcached:1.5
+  calc:
+   image: stevenpollack/docker-rserve
