@@ -44,20 +44,20 @@ You can change the configuration of the docker images by setting various environ
 
 ## Rogo Configuration
 
-When installing rogo you should set `WebServer host` to the `php` container ip address and `Database host` to the `db` container ip address.
+When installing rogo you should set `WebServer host` to `php` and `Database host` to  `db`.
 
 If you wish to use memcache for session handling you will need to edit `/usr/local/etc/php/conf.d/rogo.ini` with the following:
 
 ```
 session.save_handler = memcached
-session.save_path = "<memcached container ip address>:11211"
+session.save_path = "cache:11211"
 ```
 
 If you wish to use Rserve as you maths engine you will need to change the following in the Rogo configuration screen:
 
 | setting | value |
 |---------|-------|
-| cfg_calc_settings : host| rserve container ip |
+| cfg_calc_settings : host| calc |
 | cfg_calc_settings : port |6311 |
 | cfg_calc_settings : timeout| choose a time out in seconds |
 | cfg_calc_type| Rrserve |
