@@ -7,9 +7,12 @@ services:
      - "443:443"
     depends_on:
      - db
+     - cache
     volumes:
      - "${ROGO_DOCKER_WWWROOT}:/var/www"
   db:
    image: mysql:5.6
    environment:
      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
+  cache:
+   image: memcached:1.5

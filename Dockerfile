@@ -6,6 +6,11 @@ RUN apt-get install -y libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev s
 # enable php extenstions
 RUN docker-php-ext-install gd curl xml xmlrpc mysqli intl ldap mbstring zip pdo_mysql sockets
 
+# enable memcached php extension
+RUN apt-get update && apt-get install -y libmemcached-dev
+RUN pecl install memcached
+RUN docker-php-ext-enable memcached
+
 # create virtual hosts
 COPY conf/rogo.conf /etc/apache2/sites-available/rogo.conf
 
@@ -19,7 +24,7 @@ RUN a2ensite rogo
 RUN rm -rf /var/www/html
 
 # rogo php settings
-COPY conf/rogo.ini /etc/php/7.2/apache2/conf.d/20-user.ini
+COPY conf/rogo.ini /usr/local/etc/php/conf.d/rogo.ini
 
 # restart apache
 RUN service apache2 restart

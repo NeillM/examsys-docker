@@ -40,3 +40,14 @@ You can change the configuration of the docker images by setting various environ
 |-------------------------------------------|-----------|---------------------------------------|---------------|------------------------------------------------------------------------------|
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
+
+## Rogo Configuration
+
+When installing rogo you should set `WebServer host` to the `php` container ip address and `Database host` to the `db` container ip address.
+
+If you wish to use memcache for session handling you will need to edit `/usr/local/etc/php/conf.d/rogo.ini` with the following:
+
+```
+session.save_handler = memcached
+session.save_path = "<memcached container ip address>:11211"
+```
