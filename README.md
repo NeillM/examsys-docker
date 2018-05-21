@@ -44,7 +44,9 @@ You can change the configuration of the docker images by setting various environ
 
 ## Rogo Configuration
 
-When installing rogo you should set `WebServer host` to `web` and `Database host` to  `db`.
+When installing rogo you should set `WebServer host` to the ip address of the `web` container (this is due to database grants having to be set at the IP level).
+
+You can set the `Database host` using the mysql container name - `db`.
 
 If you wish to use memcache for session handling you will need to edit `/usr/local/etc/php/conf.d/rogo.ini` with the following:
 
