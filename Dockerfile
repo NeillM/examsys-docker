@@ -32,3 +32,5 @@ RUN service apache2 restart
 # create data dir
 RUN mkdir /rogodata
 RUN chown -R www-data:www-data /rogodata
+
+WORKDIR /var/www
