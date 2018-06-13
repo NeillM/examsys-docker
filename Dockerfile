@@ -1,7 +1,7 @@
 FROM php:7.2-apache
 
 RUN apt-get update
-RUN apt-get install -y libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert
+RUN apt-get install -y libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert gnupg
 
 # enable php extenstions
 RUN docker-php-ext-install gd curl xml xmlrpc mysqli intl ldap mbstring zip pdo_mysql sockets
@@ -29,9 +29,17 @@ COPY conf/rogo.ini /usr/local/etc/php/conf.d/rogo.ini
 # restart apache
 RUN service apache2 restart
 
-# create data dir
+# create data dirs
 RUN mkdir /rogodata
 RUN chown -R www-data:www-data /rogodata
 RUN mkdir /rogodataunit
+RUN mkdir /rogodatabehat
+
+# install node
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
+
+# cannot have sym links in docker
+RUN npm config set bin-links false
 
 WORKDIR /var/www
