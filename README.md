@@ -13,6 +13,8 @@ This should not be used on a production environment.
 export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
 # Set up mysql root password
 export ROGO_DOCKER_MYSQLROOT=password
+# Set up selenium browser
+export ROGO_DOCKER_BROWSER=chrome
 
 # Start up containers
 docker-compose up -d
@@ -41,6 +43,7 @@ You can change the configuration of the docker images by setting various environ
 |-------------------------------------------|-----------|---------------------------------------|---------------|------------------------------------------------------------------------------|
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
+| `ROGO_DOCKER_BROWSER`                     | yes       | chrome or firefox                     | none          |                                                                              |
 
 ## Rogo Configuration
 
