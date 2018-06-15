@@ -20,23 +20,9 @@ services:
    image: memcached:1.5
   calc:
    image: stevenpollack/docker-rserve
-  firefox:
-   image: selenium/node-firefox:3.12.0-cobalt
+  selenium:
+   image: selenium/standalone-chrome:3.12.0-cobalt
    volumes:
     - /dev/shm:/dev/shm
-   depends_on:
-    - hub
-   environment:
-    HUB_HOST: hub
-  chrome:
-   image: selenium/node-chrome:3.12.0-cobalt
-   volumes:
-    - /dev/shm:/dev/shm
-   depends_on:
-    - hub
-   environment:
-    HUB_HOST: hub
-  hub:
-   image: selenium/hub:3.12.0-cobalt
    ports:
     - "4444:4444"
