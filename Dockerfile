@@ -8,8 +8,8 @@ RUN docker-php-ext-install gd curl xml xmlrpc mysqli intl ldap mbstring zip pdo_
 
 # enable memcached php extension
 RUN apt-get update && apt-get install -y libmemcached-dev
-RUN pecl install memcached
-RUN docker-php-ext-enable memcached
+RUN pecl install memcached xdebug
+RUN docker-php-ext-enable memcached xdebug
 
 # create virtual hosts
 COPY conf/rogo.conf /etc/apache2/sites-available/rogo.conf
