@@ -13,6 +13,8 @@ This should not be used on a production environment.
 export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
 # Set up mysql root password
 export ROGO_DOCKER_MYSQLROOT=password
+# Expose web server ports
+export ROGO_DOCKER_EXPOSE=1
 
 # Start up containers
 docker-compose up -d
@@ -41,6 +43,7 @@ You can change the configuration of the docker images by setting various environ
 |-------------------------------------------|-----------|---------------------------------------|---------------|------------------------------------------------------------------------------|
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
+| `ROGO_DOCKER_EXPOSE`                      | no        | anything                              | none          | If set enables webserver port exposure                                       |
 
 ## Rogo Configuration
 
