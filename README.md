@@ -17,7 +17,7 @@ export ROGO_DOCKER_MYSQLROOT=password
 export ROGO_DOCKER_EXPOSE=1
 
 # Start up containers
-docker-compose up -d
+rogo-compose
 
 # Shut down and destroy containers
 docker-compose down
@@ -32,7 +32,7 @@ If you want to use your containers continuously for manual testing or developmen
 docker-compose stop
 
 # Restart containers
-docker-compose start
+rogo-compose
 ```
 
 ## Environment variables
