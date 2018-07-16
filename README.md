@@ -43,7 +43,7 @@ You can change the configuration of the docker images by setting various environ
 |-------------------------------------------|-----------|---------------------------------------|---------------|------------------------------------------------------------------------------|
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
-| `ROGO_DOCKER_EXPOSE`                      | no        | anything                              | none          | If set enables webserver port exposure                                       |
+| `ROGO_DOCKER_EXPOSE`                      | no        | 0/1                                   | 0             | 1 enables webserver port exposure                                            |
 
 ## Rogo Configuration
 
