@@ -46,6 +46,7 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_EXPOSE`                      | no        | 0/1                                   | 0             | 1 enables webserver port exposure                                            |
 | `ROGO_DOCKER_CLUSTER`                     | no        | 0/1                                   | 0             | 1 load cluster database configuration instead of default mysql               |
 | `ROGO_DOCKER_MYSQLROOT_HOST`              | no        | ip address of web container           | none          | Required by cluster database to allow access                                 |
+
 ## Rogo Configuration
 
 When installing rogo you should set `WebServer host` to the ip address of the `web` container (this is due to database grants having to be set at the IP level).
