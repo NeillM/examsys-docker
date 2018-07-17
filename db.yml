@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    depends_on:
+      - db
+      - cache
+      - calc
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}

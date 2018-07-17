@@ -1,0 +1,65 @@
+version: '2'
+services:
+  web:
+    depends_on:
+     - db
+     - cache
+     - calc
+    networks:
+     - frontend
+  ndbmgmt:
+    image: mysql/mysql-cluster:7.5
+    command: ndb_mgmd
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.2
+    volumes:
+      - ./conf/mysql-cluster.cnf:/etc/mysql-cluster.cnf
+  ndbnode1:
+    image: mysql/mysql-cluster:7.5
+    command: ndbd
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.3
+    depends_on:
+      - ndbmgmt
+  ndbnode2:
+    image: mysql/mysql-cluster:7.5
+    command: ndbd
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.4
+    depends_on:
+      - ndbmgmt
+  db:
+    image: mysql/mysql-cluster:7.5
+    command: mysqld
+    networks:
+      frontend:
+      cluster:
+        ipv4_address: 192.168.0.10
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
+      MYSQL_ROOT_HOST: ${ROGO_DOCKER_MYSQLROOT_HOST}
+    depends_on:
+      - ndbmgmt
+      - ndbnode1
+      - ndbnode2
+  cache:
+   networks:
+     - frontend
+  calc:
+   networks:
+     - frontend
+  selenium:
+   networks:
+     - frontend
+networks:
+  frontend:
+    driver: bridge
+  cluster:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.0.0/16
