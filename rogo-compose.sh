@@ -40,6 +40,7 @@ fi
 if [ "$ROGO_DOCKER_EXPOSE" == 1 ]
 then
     dockercompose="${dockercompose} -f expose.yml"
+    dockercompose="${dockercompose} -f workbench.yml"
 fi
 
 $dockercompose $@
