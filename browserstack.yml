@@ -1,0 +1,9 @@
+version: '2'
+services:
+  web:
+    ports:
+      - "8003:8003"
+  browserstack:
+    image: exilit/browserstacklocal
+    environment:
+      BROWSERSTACK_LOCAL_KEY: ${BROWSERSTACK_LOCAL_KEY}

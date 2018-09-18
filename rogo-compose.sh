@@ -37,10 +37,39 @@ then
     export ROGO_DOCKER_EXPOSE=0
 fi
 
+if [ -z "$ROGO_DOCKER_WORKBENCH" ];
+then
+    export ROGO_DOCKER_WORKBENCH=0
+fi
+
+if [ -z "$ROGO_DOCKER_SELENIUM" ];
+then
+    export ROGO_DOCKER_SELENIUM=0
+fi
+
+if [ -z "$ROGO_DOCKER_BROWSERSTACK" ];
+then
+    export ROGO_DOCKER_BROWSERSTACK=0
+fi
+
 if [ "$ROGO_DOCKER_EXPOSE" == 1 ]
 then
     dockercompose="${dockercompose} -f expose.yml"
+fi
+
+if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]
+then
     dockercompose="${dockercompose} -f workbench.yml"
+fi
+
+if [ "$ROGO_DOCKER_SELENIUM" == 1 ]
+then
+    dockercompose="${dockercompose} -f selenium.yml"
+fi
+
+if [ "$ROGO_DOCKER_BROWSERSTACK" == 1 ]
+then
+    dockercompose="${dockercompose} -f browserstack.yml"
 fi
 
 $dockercompose $@

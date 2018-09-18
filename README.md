@@ -15,6 +15,14 @@ export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
 export ROGO_DOCKER_MYSQLROOT=password
 # Expose web server ports
 export ROGO_DOCKER_EXPOSE=1
+# Expose db port for remote access
+export ROGO_DOCKER_WORKBENCH=0
+# Build Selenium for behat testing
+export ROGO_DOCKER_SELENIUM=0
+# Build BrowserStack for behat testing
+export ROGO_DOCKER_BROWSERSTACK=0
+# Your BrowserStack API key
+export BROWSERSTACK_LOCAL_KEY=key
 
 # Start up containers
 rogo-compose.sh up -d
@@ -44,6 +52,10 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
 | `ROGO_DOCKER_EXPOSE`                      | no        | 0/1                                   | 0             | 1 enables webserver port exposure                                            |
+| `ROGO_DOCKER_WORKBENCH`                   | no        | 0/1                                   | 0             | 1 enables database port exposure                                            |
+| `ROGO_DOCKER_SELENIUM`                    | no        | 0/1                                   | 0             | 1 setup selenium                                            |
+| `ROGO_DOCKER_BROWSERSTACK`                | no        | 0/1                                   | 0             | 1 setup browserstack                                            |
+| `BROWSERSTACK_LOCAL_KEY`                  | no        | string                                | none          | Your browserstack API key                                            |
 | `ROGO_DOCKER_CLUSTER`                     | no        | 0/1                                   | 0             | 1 load cluster database configuration instead of default mysql               |
 | `ROGO_DOCKER_MYSQLROOT_HOST`              | no        | ip address of web container           | none          | Required by cluster database to allow access                                 |
 

@@ -8,7 +8,3 @@ services:
    image: memcached:1.5
   calc:
    image: stevenpollack/docker-rserve
-  selenium:
-   image: selenium/standalone-chrome:3.12.0-cobalt
-   volumes:
-    - /dev/shm:/dev/shm

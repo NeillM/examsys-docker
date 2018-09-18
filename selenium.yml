@@ -1,0 +1,6 @@
+version: '2'
+services:
+  selenium:
+    image: selenium/standalone-chrome:3.12.0-cobalt
+    volumes:
+    - /dev/shm:/dev/shm
