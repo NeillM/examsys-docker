@@ -8,7 +8,7 @@ services:
     networks:
      - frontend
   ndbmgmt:
-    image: mysql/mysql-cluster:7.5
+    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
     command: ndb_mgmd
     networks:
       cluster:
@@ -16,7 +16,7 @@ services:
     volumes:
       - ./conf/mysql-cluster.cnf:/etc/mysql-cluster.cnf
   ndbnode1:
-    image: mysql/mysql-cluster:7.5
+    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -24,7 +24,7 @@ services:
     depends_on:
       - ndbmgmt
   ndbnode2:
-    image: mysql/mysql-cluster:7.5
+    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -32,7 +32,7 @@ services:
     depends_on:
       - ndbmgmt
   db:
-    image: mysql/mysql-cluster:7.5
+    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
     command: mysqld
     networks:
       frontend:

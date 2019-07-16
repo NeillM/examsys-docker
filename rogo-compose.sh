@@ -27,8 +27,16 @@ then
         echo 'Error: $ROGO_DOCKER_MYSQLROOT_HOST is not set'
         exit 1
     fi
+    if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ];
+    then
+        export ROGO_DOCKER_CLUSTERVERSION=7.5
+    fi
     dockercompose="${dockercompose} -f cluster.yml"
 else
+    if [ -z "$ROGO_DOCKER_MYSQLVERSION" ];
+    then
+        export ROGO_DOCKER_MYSQLVERSION=5.7
+    fi
     dockercompose="${dockercompose} -f db.yml"
 fi
 

@@ -58,6 +58,8 @@ You can change the configuration of the docker images by setting various environ
 | `BROWSERSTACK_LOCAL_KEY`                  | no        | string                                | none          | Your browserstack API key                                            |
 | `ROGO_DOCKER_CLUSTER`                     | no        | 0/1                                   | 0             | 1 load cluster database configuration instead of default mysql               |
 | `ROGO_DOCKER_MYSQLROOT_HOST`              | no        | ip address of web container           | none          | Required by cluster database to allow access                                 |
+| `ROGO_DOCKER_MYSQLVERSION`                | yes       | version of mysql to deploy            | 5.7           | Required by mysql database                                 |
+| `ROGO_DOCKER_CLUSTERVERSION`              | yes       | version of cluster to deploy          | 7.5           | Required by cluster database                                 |
 
 ## Rogo Configuration
 

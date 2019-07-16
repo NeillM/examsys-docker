@@ -6,6 +6,6 @@ services:
       - cache
       - calc
   db:
-    image: mysql:5.7
+    image: mysql:${ROGO_DOCKER_MYSQLVERSION}
     environment:
       MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
