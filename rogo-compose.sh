@@ -41,6 +41,15 @@ else
 fi
 
 if [ -z "$ROGO_DOCKER_EXPOSE" ];
+    if [ -z "$ROGO_DOCKER_WEB_HTTP_PORT" ];
+    then
+        export ROGO_DOCKER_WEB_HTTP_PORT=80
+    fi
+
+    if [ -z "$ROGO_DOCKER_WEB_HTTPS_PORT" ];
+    then
+        export ROGO_DOCKER_WEB_HTTPS_PORT=443
+    fi
 then
     export ROGO_DOCKER_EXPOSE=0
 fi

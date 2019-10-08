@@ -15,6 +15,10 @@ export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
 export ROGO_DOCKER_MYSQLROOT=password
 # Expose web server ports
 export ROGO_DOCKER_EXPOSE=1
+# Web server http port on host
+export ROGO_DOCKER_WEB_HTTP_PORT=80
+# Web server https port on host
+export ROGO_DOCKER_WEB_HTTPS_PORT=443
 # Expose db port for remote access
 export ROGO_DOCKER_WORKBENCH=0
 # Build Selenium for behat testing
@@ -52,14 +56,16 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_WWWROOT`                     | yes       | path on your file system              | none          | The path to the Rogo codebase you intend to test                             |
 | `ROGO_DOCKER_MYSQLROOT`                   | yes       | string                                | none          | The root password for your mysql database                                    |
 | `ROGO_DOCKER_EXPOSE`                      | no        | 0/1                                   | 0             | 1 enables webserver port exposure                                            |
-| `ROGO_DOCKER_WORKBENCH`                   | no        | 0/1                                   | 0             | 1 enables database port exposure                                            |
-| `ROGO_DOCKER_SELENIUM`                    | no        | 0/1                                   | 0             | 1 setup selenium                                            |
-| `ROGO_DOCKER_BROWSERSTACK`                | no        | 0/1                                   | 0             | 1 setup browserstack                                            |
-| `BROWSERSTACK_LOCAL_KEY`                  | no        | string                                | none          | Your browserstack API key                                            |
+| `ROGO_DOCKER_WORKBENCH`                   | no        | 0/1                                   | 0             | 1 enables database port exposure                                             |
+| `ROGO_DOCKER_WEB_HTTP_PORT`               | yes       | integer                               | 80            | Host http port for web server                                                |
+| `ROGO_DOCKER_WEB_HTTPS_PORT`              | yes      | integer                               | 443           | Host https port for web server                                                |
+| `ROGO_DOCKER_SELENIUM`                    | no        | 0/1                                   | 0             | 1 setup selenium                                                             |
+| `ROGO_DOCKER_BROWSERSTACK`                | no        | 0/1                                   | 0             | 1 setup browserstack                                                         |
+| `BROWSERSTACK_LOCAL_KEY`                  | no        | string                                | none          | Your browserstack API key                                                    |
 | `ROGO_DOCKER_CLUSTER`                     | no        | 0/1                                   | 0             | 1 load cluster database configuration instead of default mysql               |
 | `ROGO_DOCKER_MYSQLROOT_HOST`              | no        | ip address of web container           | none          | Required by cluster database to allow access                                 |
-| `ROGO_DOCKER_MYSQLVERSION`                | yes       | version of mysql to deploy            | 5.7           | Required by mysql database                                 |
-| `ROGO_DOCKER_CLUSTERVERSION`              | yes       | version of cluster to deploy          | 7.5           | Required by cluster database                                 |
+| `ROGO_DOCKER_MYSQLVERSION`                | yes       | version of mysql to deploy            | 5.7           | Required by mysql database                                                   |
+| `ROGO_DOCKER_CLUSTERVERSION`              | yes       | version of cluster to deploy          | 7.5           | Required by cluster database                                                 |
 
 ## Rogo Configuration
 
