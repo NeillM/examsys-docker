@@ -37,7 +37,8 @@ RUN mkdir /rogodataunit
 RUN mkdir /rogodatabehat
 
 # install node
-RUN apt-get install -y npm
+RUN apt-get install -y nodejs
+RUN curl -sL  https://www.npmjs.com/install.sh | bash -
 
 # cannot have sym links in docker
 RUN npm config set bin-links false
