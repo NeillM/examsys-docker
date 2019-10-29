@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: drjosephbaxter/rogo
+    build: .
     volumes:
      - "${ROGO_DOCKER_WWWROOT}:/var/www"
   cache:

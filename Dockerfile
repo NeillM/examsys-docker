@@ -1,7 +1,7 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 
 RUN apt-get update
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert gnupg
+RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert gnupg libzip-dev
 
 # enable php extenstions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -37,8 +37,7 @@ RUN mkdir /rogodataunit
 RUN mkdir /rogodatabehat
 
 # install node
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 
 # cannot have sym links in docker
 RUN npm config set bin-links false
