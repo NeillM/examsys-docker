@@ -66,7 +66,7 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_MYSQLROOT_HOST`              | no        | ip address of web container           | none          | Required by cluster database to allow access                                 |
 | `ROGO_DOCKER_MYSQLVERSION`                | yes       | version of mysql to deploy            | 5.7           | Required by mysql database                                                   |
 | `ROGO_DOCKER_CLUSTERVERSION`              | yes       | version of cluster to deploy          | 7.5           | Required by cluster database                                                 |
-
+| `SELENIUM_VERSION`                        | no        | version of selenium                   | 3.14          | Version of selenium                                                          |
 ## Rogo Configuration
 
 When installing rogo you should set `WebServer host` to the ip address of the `web` container (this is due to database grants having to be set at the IP level).
