@@ -15,6 +15,11 @@ fi
 
 dockercompose="docker-compose -f docker-compose.yml"
 
+if [ -z "$ROGO_DOCKER_MYSQLTZ" ];
+then
+    export ROGO_DOCKER_MYSQLTZ=UTC
+fi
+
 if [ -z "$ROGO_DOCKER_CLUSTER" ];
 then
     export ROGO_DOCKER_CLUSTER=0

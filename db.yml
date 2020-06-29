@@ -11,3 +11,4 @@ services:
     image: mysql:${ROGO_DOCKER_MYSQLVERSION}
     environment:
       MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
+      TZ: ${ROGO_DOCKER_MYSQLTZ}
