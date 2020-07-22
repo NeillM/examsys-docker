@@ -25,6 +25,11 @@ then
     export ROGO_DOCKER_CLUSTER=0
 fi
 
+if [ -z "$ROGO_DOCKER_INNODB_CLUSTER" ];
+then
+    export $ROGO_DOCKER_INNODB_CLUSTER=0
+fi
+
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$ROGO_DOCKER_MYSQLROOT_HOST" ];
@@ -37,6 +42,26 @@ then
         export ROGO_DOCKER_CLUSTERVERSION=7.5
     fi
     dockercompose="${dockercompose} -f cluster.yml"
+else if [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
+then
+    if [ -z "$ROGO_DOCKER_MYSQLROOT_HOST" ];
+    then
+        echo 'Error: $ROGO_DOCKER_MYSQLROOT_HOST is not set'
+        exit 1
+    fi
+    if [ -z "$ROGO_DOCKER_MYSQL_ROUTERVERSION" ];
+    then
+        export ROGO_DOCKER_MYSQL_ROUTERVERSION=8.0
+    fi
+    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
+    then
+        export ROGO_DOCKER_MYSQL_PORT=6446
+    fi
+    if [ -z "$ROGO_DOCKER_MYSQL_USER" ];
+    then
+        export ROGO_DOCKER_MYSQL_USER=root
+    fi
+    dockercompose="${dockercompose} -f innodb-cluster.yml"
 else
     if [ -z "$ROGO_DOCKER_MYSQLVERSION" ];
     then
@@ -81,7 +106,12 @@ fi
 
 if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]
 then
-    dockercompose="${dockercompose} -f workbench.yml"
+    if [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
+    then
+        dockercompose="${dockercompose} -f innodb-cluster-workbench.yml"
+    else
+        dockercompose="${dockercompose} -f workbench.yml"
+    fi
 fi
 
 if [ "$ROGO_DOCKER_SELENIUM" == 1 ]
