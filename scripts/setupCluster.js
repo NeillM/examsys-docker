@@ -13,4 +13,9 @@ try {
   print('\nInnoDB cluster deployed successfully.\n');
 } catch(e) {
   print('\nThe InnoDB cluster could not be created.\n\nError: ' + e.message + '\n');
+  try {
+    dba.rebootClusterFromCompleteOutage(clusterName);
+  } catch(e) {
+    print('\nThe InnoDB cluster could not be rebooted.\n\nError: ' + e.message + '\n');
+  }
 }
