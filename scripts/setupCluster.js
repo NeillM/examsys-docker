@@ -17,5 +17,6 @@ try {
     dba.rebootClusterFromCompleteOutage(clusterName);
   } catch(e) {
     print('\nThe InnoDB cluster could not be rebooted.\n\nError: ' + e.message + '\n');
+    print('\nYou may need to wait until mysql-server-1 logs "[Repl] Plugin group_replication reported: \'Setting super_read_only=ON.\'" before tryint to ru nthis script again.\n');
   }
 }
