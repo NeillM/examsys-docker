@@ -1,0 +1,16 @@
+version: '2'
+services:
+  db:
+    environment:
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "6446:6446"
+  mysql-server-1:
+    environment:
+      MYSQL_ROOT_HOST: "%"
+  mysql-server-2:
+    environment:
+      MYSQL_ROOT_HOST: "%"
+  mysql-server-3:
+    environment:
+      MYSQL_ROOT_HOST: "%"
