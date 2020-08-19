@@ -27,7 +27,7 @@ fi
 
 if [ -z "$ROGO_DOCKER_INNODB_CLUSTER" ];
 then
-    export $ROGO_DOCKER_INNODB_CLUSTER=0
+    export ROGO_DOCKER_INNODB_CLUSTER=0
 fi
 
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
