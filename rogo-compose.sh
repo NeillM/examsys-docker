@@ -118,7 +118,7 @@ if [ "$ROGO_DOCKER_SELENIUM" == 1 ]
 then
     if [ -z "$SELENIUM_VERSION" ];
     then
-        export $SELENIUM_VERSION=3.14
+        export SELENIUM_VERSION=3.14
     fi
     dockercompose="${dockercompose} -f selenium.yml"
 fi
