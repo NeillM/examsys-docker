@@ -42,7 +42,7 @@ then
         export ROGO_DOCKER_CLUSTERVERSION=7.5
     fi
     dockercompose="${dockercompose} -f cluster.yml"
-else if [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
+elif [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
 then
     if [ -z "$ROGO_DOCKER_MYSQLROOT_HOST" ];
     then
