@@ -14,7 +14,7 @@ services:
       cluster:
         ipv4_address: 192.168.0.2
     volumes:
-      - ./conf/mysql-cluster.cnf:/usr/mysql-cluster/mysql-cluster.cnf
+      - ./conf/mysql-cluster.cnf:/etc/mysql-cluster.cnf
   ndbnode1:
     image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
     command: ndbd
