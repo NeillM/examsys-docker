@@ -2,10 +2,14 @@ var dbPass = "password"
 var clusterName = "devCluster"
 
 try {
+  print('Configuring instances to the cluster.\n');
+  dba.configureInstance({user: "root", host: "mysql-server-1", password: dbPass})
+  dba.configureInstance({user: "root", host: "mysql-server-2", password: dbPass})
+  dba.configureInstance({user: "root", host: "mysql-server-3", password: dbPass})
   print('Setting up InnoDB cluster...\n');
   shell.connect('root@mysql-server-1:3306', dbPass)
   var cluster = dba.createCluster(clusterName);
-  print('Adding instances to the cluster.');
+  print('Adding instances to the cluster.\n');
   cluster.addInstance({user: "root", host: "mysql-server-2", password: dbPass})
   print('.');
   cluster.addInstance({user: "root", host: "mysql-server-3", password: dbPass})
