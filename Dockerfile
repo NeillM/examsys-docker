@@ -1,11 +1,12 @@
-FROM php:7.3-apache
+FROM php:7.4-apache
 
 RUN apt-get update
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert gnupg libzip-dev
+RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libcurl4-openssl-dev libxml2-dev libldap-dev ssl-cert gnupg libzip-dev libonig-dev
 
 # enable php extenstions
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd curl xml xmlrpc mysqli intl ldap mbstring zip pdo_mysql sockets
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+&& docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-install curl xml xmlrpc mysqli intl ldap mbstring zip pdo_mysql sockets
 
 # enable memcached php extension
 RUN apt-get update && apt-get install -y libmemcached-dev
