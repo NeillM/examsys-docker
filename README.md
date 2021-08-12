@@ -23,6 +23,8 @@ export ROGO_DOCKER_WEB_HTTPS_PORT=443
 export ROGO_DOCKER_WORKBENCH=0
 # Build Selenium for behat testing
 export ROGO_DOCKER_SELENIUM=0
+# Setup Selenium in debug mode
+export ROGO_DOCKER_SELENIUM_DEBUG=0
 # Build BrowserStack for behat testing
 export ROGO_DOCKER_BROWSERSTACK=0
 # Your BrowserStack API key
@@ -60,6 +62,7 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_WEB_HTTP_PORT`               | yes                | integer                          | 80            | Host http port for web server                                                |
 | `ROGO_DOCKER_WEB_HTTPS_PORT`              | yes                | integer                          | 443           | Host https port for web server                                               |
 | `ROGO_DOCKER_SELENIUM`                    | no                 | 0/1                              | 0             | 1 setup selenium                                                             |
+| `ROGO_DOCKER_SELENIUM_DEBUG`              | no                 | 0/1                              | 0             | 1 debug mode                                                            |
 | `ROGO_DOCKER_BROWSERSTACK`                | no                 | 0/1                              | 0             | 1 setup browserstack                                                         |
 | `BROWSERSTACK_LOCAL_KEY`                  | no                 | string                           | none          | Your browserstack API key                                                    |
 | `ROGO_DOCKER_CLUSTER`                     | ndb cluster        | 0/1                              | 0             | 1 load cluster database configuration                                        |

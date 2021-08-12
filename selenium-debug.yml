@@ -1,0 +1,8 @@
+version: '2'
+services:
+  selenium:
+    image: selenium/standalone-chrome-debug:${SELENIUM_VERSION}
+    ports:
+      - "5900:5900"
+    volumes:
+    - /dev/shm:/dev/shm

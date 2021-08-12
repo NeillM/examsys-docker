@@ -119,7 +119,12 @@ then
     then
         export SELENIUM_VERSION=3.141.59
     fi
-    dockercompose="${dockercompose} -f selenium.yml"
+    if [ "$ROGO_DOCKER_SELENIUM_DEBUG" == 1 ]
+    then
+        dockercompose="${dockercompose} -f selenium-debug.yml"
+    else
+        dockercompose="${dockercompose} -f selenium.yml"
+    fi
 fi
 
 if [ "$ROGO_DOCKER_BROWSERSTACK" == 1 ]
