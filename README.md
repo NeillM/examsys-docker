@@ -96,3 +96,16 @@ If you wish to use Rserve as you maths engine you will need to change the follow
 | cfg_calc_settings : port |6311 |
 | cfg_calc_settings : timeout| choose a time out in seconds |
 | cfg_calc_type| Rrserve |
+
+### Email
+
+Emails are not enabled by default in the docker image. However, you can set Rogo up to use Mail Catcher as its SMTP server.
+
+You will need to change the following in the Rogo configuration screen:
+
+| setting | value |
+|---------|-------|
+| mailer_host | mail |
+| mailer_port | 1025 |
+
+The web interface to inspect the emails sent by Rogo is exposed on port 1080
