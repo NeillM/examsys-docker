@@ -8,3 +8,7 @@ services:
    image: memcached:1.5
   calc:
    image: stevenpollack/docker-rserve
+  mail:
+    image: dockage/mailcatcher
+    ports:
+      - "1080:1080"
