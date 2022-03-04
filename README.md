@@ -6,6 +6,8 @@ This should not be used on a production environment.
 ## Prerequisites
 * [Docker](https://docs.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed
 
+Note: These scripts are not fully compatible with the docker-compose command using Docker Compose V2
+
 ## Quick start
 
 ```bash
