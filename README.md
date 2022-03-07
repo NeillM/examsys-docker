@@ -1,6 +1,6 @@
-# rogo-docker: Docker Containers for Rogo Developers
+# rogo-docker: Docker Containers for Rogō Developers
 
-This repository contains Docker configuration aimed at Rogo developers to easily deploy a testing environment for Rogo.
+This repository contains Docker configuration aimed at Rogō developers to easily deploy a testing environment for Rogō.
 
 This should not be used on a production environment.
 ## Prerequisites
@@ -11,7 +11,7 @@ Note: These scripts are not fully compatible with the docker-compose command usi
 ## Quick start
 
 ```bash
-# Set up path to Rogo code
+# Set up path to Rogō code
 export ROGO_DOCKER_WWWROOT=/path/to/rogo/code
 # Set up mysql root password
 export ROGO_DOCKER_MYSQLROOT=password
@@ -77,11 +77,20 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_MYSQL_PORT`                  | innodb cluster     | integer                          | 6446          | port the mysql server is using                                               |
 | `ROGO_DOCKER_MYSQL_USER`                  | innodb cluster     | string                           | root          | user used to connect to servers                                              |
 | `ROGO_DOCKER_MYSQL_ROUTERVERSION`         | innodb cluster     | version of mysql router to depoy | 8.0           | Required by mysql router                                                     |
-## Rogo Configuration
 
-When installing rogo you should set `WebServer host` to the ip address of the `web` container (this is due to database grants having to be set at the IP level).
+## Installing Rogō
 
-You can set the `Database host` using the mysql container name - `db`.
+Create a settings.xml file in the config directory of Rogō, you can use an example file from this repository, for example settings-innodb.xml.
+
+To ensure that there are no database connection errors when the hosts are started and stopped the settings/server/host value can be set as % this will ensure that the Rogō database users can connect to the database from any server (you should not do this on a production server).
+
+Now you can install Rogō using the following command:
+
+```bash
+rogo-compose.sh exec -T web php cli/init.php -u root -p $ROGO_DOCKER_MYSQLROOT -s db -t 3306 -n rogo
+```
+
+### Memecache session handling 
 
 If you wish to use memcache for session handling you will need to edit `/usr/local/etc/php/conf.d/rogo.ini` with the following:
 
@@ -90,7 +99,7 @@ session.save_handler = memcached
 session.save_path = "cache:11211"
 ```
 
-If you wish to use Rserve as you maths engine you will need to change the following in the Rogo configuration screen:
+If you wish to use Rserve as your maths engine you will need to change the following in the Rogō configuration screen:
 
 | setting | value |
 |---------|-------|
@@ -103,11 +112,11 @@ If you wish to use Rserve as you maths engine you will need to change the follow
 
 Emails are not enabled by default in the docker image. However, you can set Rogo up to use Mail Catcher as its SMTP server.
 
-You will need to change the following in the Rogo configuration screen:
+You will need to change the following in the Rogō configuration screen:
 
 | setting | value |
 |---------|-------|
 | mailer_host | mail |
 | mailer_port | 1025 |
 
-The web interface to inspect the emails sent by Rogo is exposed on port 1080
+The web interface to inspect the emails sent by Rogō is exposed on port 1080
