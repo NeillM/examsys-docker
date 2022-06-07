@@ -26,7 +26,6 @@ services:
     environment:
       MYSQL_USER: ${ROGO_DOCKER_MYSQL_USER}
       MYSQL_HOST: mysql-server-1
-      MYSQL_PORT: ${ROGO_DOCKER_MYSQL_PORT}
       MYSQL_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
       MYSQLSH_SCRIPT: /scripts/setupCluster.js
     volumes:
@@ -40,7 +39,6 @@ services:
     environment:
       MYSQL_USER: ${ROGO_DOCKER_MYSQL_USER}
       MYSQL_HOST: mysql-server-1
-      MYSQL_PORT: ${ROGO_DOCKER_MYSQL_PORT}
       MYSQL_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
       MYSQL_INNODB_NUM_MEMBERS: 3
       TZ: ${ROGO_DOCKER_MYSQLTZ}

@@ -41,6 +41,10 @@ then
     then
         export ROGO_DOCKER_CLUSTERVERSION=7.5
     fi
+    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
+    then
+        export ROGO_DOCKER_MYSQL_PORT=3306
+    fi
     dockercompose="${dockercompose} -f cluster.yml"
 elif [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
 then
@@ -66,6 +70,10 @@ else
     if [ -z "$ROGO_DOCKER_MYSQLVERSION" ]
     then
         export ROGO_DOCKER_MYSQLVERSION=5.7
+    fi
+    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
+    then
+        export ROGO_DOCKER_MYSQL_PORT=3306
     fi
     dockercompose="${dockercompose} -f db.yml"
 fi
