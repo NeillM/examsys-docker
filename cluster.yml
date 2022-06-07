@@ -41,7 +41,7 @@ services:
         ipv4_address: 192.168.0.10
     environment:
       MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
-      MYSQL_ROOT_HOST: ${ROGO_DOCKER_MYSQLROOT_HOST}
+      MYSQL_ROOT_HOST: "%"
       TZ: ${ROGO_DOCKER_MYSQLTZ}
     depends_on:
       - ndbmgmt

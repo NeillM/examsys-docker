@@ -3,28 +3,74 @@ services:
   mysql-server-1:
     image: mysql/mysql-server:${ROGO_DOCKER_MYSQLVERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
-      MYSQL_ROOT_HOST: ${ROGO_DOCKER_MYSQLROOT_HOST}
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ROOT_HOST: "%"
       TZ: ${ROGO_DOCKER_MYSQLTZ}
-    command: ["mysqld","--server_id=1","--binlog_checksum=NONE","--gtid_mode=ON","--enforce_gtid_consistency=ON","--log_bin","--log_slave_updates=ON","--master_info_repository=TABLE","--relay_log_info_repository=TABLE","--transaction_write_set_extraction=XXHASH64","--user=root","--skip-host-cache","--skip-name-resolve", "--default_authentication_plugin=mysql_native_password"]
+    command: [
+      "mysqld",
+      "--server_id=1",
+      "--binlog_checksum=NONE",
+      "--gtid_mode=ON",
+      "--enforce_gtid_consistency=ON",
+      "--log_bin",
+      "--log_slave_updates=ON",
+      "--master_info_repository=TABLE",
+      "--relay_log_info_repository=TABLE",
+      "--transaction_write_set_extraction=XXHASH64",
+      "--user=root",
+      "--skip-host-cache",
+      "--skip-name-resolve",
+      "--default_authentication_plugin=mysql_native_password"
+    ]
   mysql-server-2:
     image: mysql/mysql-server:${ROGO_DOCKER_MYSQLVERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
-      MYSQL_ROOT_HOST: ${ROGO_DOCKER_MYSQLROOT_HOST}
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ROOT_HOST: "%"
       TZ: ${ROGO_DOCKER_MYSQLTZ}
-    command: ["mysqld","--server_id=2","--binlog_checksum=NONE","--gtid_mode=ON","--enforce_gtid_consistency=ON","--log_bin","--log_slave_updates=ON","--master_info_repository=TABLE","--relay_log_info_repository=TABLE","--transaction_write_set_extraction=XXHASH64","--user=root","--skip-host-cache","--skip-name-resolve", "--default_authentication_plugin=mysql_native_password"]
+    command: [
+      "mysqld",
+      "--server_id=2",
+      "--binlog_checksum=NONE",
+      "--gtid_mode=ON",
+      "--enforce_gtid_consistency=ON",
+      "--log_bin",
+      "--log_slave_updates=ON",
+      "--master_info_repository=TABLE",
+      "--relay_log_info_repository=TABLE",
+      "--transaction_write_set_extraction=XXHASH64",
+      "--user=root",
+      "--skip-host-cache",
+      "--skip-name-resolve",
+      "--default_authentication_plugin=mysql_native_password"
+    ]
   mysql-server-3:
     image: mysql/mysql-server:${ROGO_DOCKER_MYSQLVERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
-      MYSQL_ROOT_HOST: ${ROGO_DOCKER_MYSQLROOT_HOST}
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ROOT_HOST: "%"
       TZ: ${ROGO_DOCKER_MYSQLTZ}
-    command: ["mysqld","--server_id=3","--binlog_checksum=NONE","--gtid_mode=ON","--enforce_gtid_consistency=ON","--log_bin","--log_slave_updates=ON","--master_info_repository=TABLE","--relay_log_info_repository=TABLE","--transaction_write_set_extraction=XXHASH64","--user=root","--skip-host-cache","--skip-name-resolve", "--default_authentication_plugin=mysql_native_password"]
+    command: [
+      "mysqld",
+      "--server_id=3",
+      "--binlog_checksum=NONE",
+      "--gtid_mode=ON",
+      "--enforce_gtid_consistency=ON",
+      "--log_bin",
+      "--log_slave_updates=ON",
+      "--master_info_repository=TABLE",
+      "--relay_log_info_repository=TABLE",
+      "--transaction_write_set_extraction=XXHASH64",
+      "--user=root",
+      "--skip-host-cache",
+      "--skip-name-resolve",
+      "--default_authentication_plugin=mysql_native_password"
+    ]
   mysql-shell:
     image: bkandasa/mysql-shell-batch
     environment:
       MYSQL_USER: ${ROGO_DOCKER_MYSQL_USER}
+      MYSQL_PORT: 6446
       MYSQL_HOST: mysql-server-1
       MYSQL_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
       MYSQLSH_SCRIPT: /scripts/setupCluster.js
@@ -38,7 +84,8 @@ services:
     image: mysql/mysql-router:${ROGO_DOCKER_MYSQL_ROUTERVERSION}
     environment:
       MYSQL_USER: ${ROGO_DOCKER_MYSQL_USER}
-      MYSQL_HOST: mysql-server-1
+      MYSQL_PORT: 6446
+      MYSQL_HOST: "%"
       MYSQL_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
       MYSQL_INNODB_NUM_MEMBERS: 3
       TZ: ${ROGO_DOCKER_MYSQLTZ}
