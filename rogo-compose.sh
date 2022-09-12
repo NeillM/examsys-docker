@@ -30,6 +30,11 @@ then
     export ROGO_DOCKER_INNODB_CLUSTER=0
 fi
 
+if [ -z "$ROGO_MEMCACHED" ]
+then
+    export ROGO_MEMCACHED=0
+fi
+
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ]
@@ -103,6 +108,11 @@ fi
 if [ "$ROGO_DOCKER_EXPOSE" == 1 ]
 then
     dockercompose="${dockercompose} -f expose.yml"
+fi
+
+if [ "$ROGO_MEMCACHED" == 1 ]
+then
+    dockercompose="${dockercompose} -f memcache.yml"
 fi
 
 if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]

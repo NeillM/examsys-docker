@@ -95,8 +95,3 @@ services:
       - mysql-server-3
       - mysql-shell
     restart: on-failure
-  web:
-    depends_on:
-      - db
-      - cache
-      - calc
