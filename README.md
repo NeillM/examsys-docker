@@ -92,6 +92,28 @@ Now you can install Rogō using the following command:
 rogo-compose.sh exec -T web php cli/init.php -u root -p $ROGO_DOCKER_MYSQLROOT -s db -t 3306 -n rogo
 ```
 
+If you wish to do automatic testing of Rogō you must install it directly from the git repository, since the community releases do not include the testing code.
+
+### Phpunit
+
+To initialise phpunit you will need to create a phpunit.xml file in the config directory, you can use an example file from this repository as a base for this phpunit-innodb.xml (The database password in it will need modifying)
+
+After installing Rogō you will now be able to initialise the phpunit database using:
+
+```bash
+rogo-compose.sh exec -T web php testing/unittest/cli/init.php
+```
+
+### Behat
+
+To initialise phpunit you will need to create a behat.xml file in the config directory, you can use an example file from this repository as a base for this behat-innodb.xml (The database password in it will need modifying)
+
+After installing Rogō you will be able to initialise the phpunit database using:
+
+```bash
+rogo-compose.sh exec -T web php testing/behat/cli/init.php
+```
+
 ### Rserve
 
 If you wish to use Rserve as your maths engine you will need to change the following in the Rogō configuration screen:
