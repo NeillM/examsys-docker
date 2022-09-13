@@ -68,7 +68,6 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_BROWSERSTACK`        | no                 | 0/1                               | 0             | 1 setup browserstack                                        |
 | `BROWSERSTACK_LOCAL_KEY`          | no                 | string                            | none          | Your browserstack API key                                   |
 | `ROGO_DOCKER_CLUSTER`             | ndb cluster        | 0/1                               | 0             | 1 load cluster database configuration                       |
-| `ROGO_DOCKER_MYSQLROOT_HOST`      | ndb/innodb cluster | ip address of web container       | none          | Required by cluster databases to allow designated IP access |
 | `ROGO_DOCKER_MYSQLVERSION`        | yes                | version of mysql to deploy        | latest        | Required by mysql database                                  |
 | `ROGO_DOCKER_MYSQLTZ`             | yes                | default timezone of db            | UTC           | This to be set to the same as the web service               |
 | `ROGO_DOCKER_CLUSTERVERSION`      | ndb cluster        | version of cluster to deploy      | 7.5           | Required by cluster database                                |
