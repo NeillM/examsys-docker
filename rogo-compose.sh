@@ -40,6 +40,11 @@ then
     export ROGO_RSERVE=1
 fi
 
+if [ -z "$ROGO_MAIL_PORT" ]
+then
+    export ROGO_MAIL_PORT=1080
+fi
+
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ]

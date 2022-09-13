@@ -79,6 +79,7 @@ You can change the configuration of the docker images by setting various environ
 | `ROGO_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster     | version of mysql router to deploy | 8.0           | Required by mysql router                                    |
 | `ROGO_MEMCACHED`                  | no                 | 0/1                               | 0             | Enables memcached sessions in PHP                           |
 | `ROGO_RSERVE`                     | no                 | 0/1                               | 1             | Starts rserve                                               |
+| `ROGO_MAIL_PORT`                  | no                 | integer                           | 1080          | The port that the mail server will be exposed on            |
 
 ## Installing Rogō
 

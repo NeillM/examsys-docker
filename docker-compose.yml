@@ -9,4 +9,4 @@ services:
   mail:
     image: dockage/mailcatcher
     ports:
-      - "1080:1080"
+      - "${ROGO_MAIL_PORT}:1080"
