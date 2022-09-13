@@ -35,6 +35,11 @@ then
     export ROGO_MEMCACHED=0
 fi
 
+if [ -z "$ROGO_RSERVE" ]
+then
+    export ROGO_RSERVE=1
+fi
+
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ]
@@ -113,6 +118,11 @@ fi
 if [ "$ROGO_MEMCACHED" == 1 ]
 then
     dockercompose="${dockercompose} -f memcache.yml"
+fi
+
+if [ "$ROGO_RSERVE" == 1 ]
+then
+    dockercompose="${dockercompose} -f rserve.yml"
 fi
 
 if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]

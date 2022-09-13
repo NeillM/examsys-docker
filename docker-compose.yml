@@ -3,12 +3,9 @@ services:
   web:
     depends_on:
       - db
-      - calc
     image: drjosephbaxter/rogo
     volumes:
      - "${ROGO_DOCKER_WWWROOT}:/var/www"
-  calc:
-   image: stevenpollack/docker-rserve
   mail:
     image: dockage/mailcatcher
     ports:
