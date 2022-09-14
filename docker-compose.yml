@@ -3,9 +3,9 @@ services:
   web:
     depends_on:
       - db
-    image: drjosephbaxter/rogo
+    image: uonlearningtech/examsys-php-apache:${ROGO_DOCKER_PHP}
     volumes:
-     - "${ROGO_DOCKER_WWWROOT}:/var/www"
+     - "${ROGO_DOCKER_WWWROOT}:/var/www/html"
   mail:
     image: dockage/mailcatcher
     ports:

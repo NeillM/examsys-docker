@@ -55,36 +55,44 @@ rogo-compose.sh start
 
 You can change the configuration of the docker images by setting various environment variables before calling `docker-compose up`.
 
-| Environment Variable              | Mandatory          | Allowed values                    | Default value | Notes                                                       |
-|-----------------------------------|--------------------|-----------------------------------|---------------|-------------------------------------------------------------|
-| `ROGO_DOCKER_WWWROOT`             | yes                | path on your file system          | none          | The path to the Rogo codebase you intend to test            |
-| `ROGO_DOCKER_MYSQLROOT`           | yes                | string                            | none          | The root password for your mysql database                   |
-| `ROGO_DOCKER_EXPOSE`              | no                 | 0/1                               | 0             | 1 enables webserver port exposure                           |
-| `ROGO_DOCKER_WORKBENCH`           | no                 | 0/1                               | 0             | 1 enables database port exposure                            |
-| `ROGO_DOCKER_WEB_HTTP_PORT`       | yes                | integer                           | 80            | Host http port for web server                               |
-| `ROGO_DOCKER_WEB_HTTPS_PORT`      | yes                | integer                           | 443           | Host https port for web server                              |
-| `ROGO_DOCKER_SELENIUM`            | no                 | 0/1                               | 0             | 1 setup selenium                                            |
-| `ROGO_DOCKER_SELENIUM_DEBUG`      | no                 | 0/1                               | 0             | 1 debug mode                                                |
-| `ROGO_DOCKER_BROWSERSTACK`        | no                 | 0/1                               | 0             | 1 setup browserstack                                        |
-| `BROWSERSTACK_LOCAL_KEY`          | no                 | string                            | none          | Your browserstack API key                                   |
-| `ROGO_DOCKER_CLUSTER`             | ndb cluster        | 0/1                               | 0             | 1 load cluster database configuration                       |
-| `ROGO_DOCKER_MYSQLVERSION`        | yes                | version of mysql to deploy        | latest        | Required by mysql database                                  |
-| `ROGO_DOCKER_MYSQLTZ`             | yes                | default timezone of db            | UTC           | This to be set to the same as the web service               |
-| `ROGO_DOCKER_CLUSTERVERSION`      | ndb cluster        | version of cluster to deploy      | 7.5           | Required by cluster database                                |
-| `SELENIUM_VERSION`                | no                 | version of selenium               | 3.14          | Version of selenium                                         |
-| `ROGO_DOCKER_INNODB_CLUSTER`      | innodb cluster     | 0/1                               | 0             | 1 load innodb cluster database configuration                |
-| `ROGO_DOCKER_MYSQL_PORT`          | no                 | integer                           | 3306/6446     | port that mysql workbench can use to connect                |
-| `ROGO_DOCKER_MYSQL_USER`          | innodb cluster     | string                            | root          | user used to connect to servers                             |
-| `ROGO_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster     | version of mysql router to deploy | 8.0           | Required by mysql router                                    |
-| `ROGO_MEMCACHED`                  | no                 | 0/1                               | 0             | Enables memcached sessions in PHP                           |
-| `ROGO_RSERVE`                     | no                 | 0/1                               | 1             | Starts rserve                                               |
-| `ROGO_MAIL_PORT`                  | no                 | integer                           | 1080          | The port that the mail server will be exposed on            |
+| Environment Variable              | Mandatory      | Allowed values                    | Default value | Notes                                            |
+|-----------------------------------|----------------|-----------------------------------|---------------|--------------------------------------------------|
+| `ROGO_DOCKER_WWWROOT`             | yes            | path on your file system          | none          | The path to the Rogo codebase you intend to test |
+| `ROGO_DOCKER_MYSQLROOT`           | yes            | string                            | none          | The root password for your mysql database        |
+| `ROGO_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | latest        | The version of PHP that should be used           |
+| `ROGO_DOCKER_EXPOSE`              | no             | 0/1                               | 0             | 1 enables webserver port exposure                |
+| `ROGO_DOCKER_WORKBENCH`           | no             | 0/1                               | 0             | 1 enables database port exposure                 |
+| `ROGO_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80            | Host http port for web server                    |
+| `ROGO_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443           | Host https port for web server                   |
+| `ROGO_DOCKER_SELENIUM`            | no             | 0/1                               | 0             | 1 setup selenium                                 |
+| `ROGO_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0             | 1 debug mode                                     |
+| `ROGO_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0             | 1 setup browserstack                             |
+| `BROWSERSTACK_LOCAL_KEY`          | no             | string                            | none          | Your browserstack API key                        |
+| `ROGO_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0             | 1 load cluster database configuration            |
+| `ROGO_DOCKER_MYSQLVERSION`        | yes            | version of mysql to deploy        | latest        | Required by mysql database                       |
+| `ROGO_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC           | This to be set to the same as the web service    |
+| `ROGO_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 7.5           | Required by cluster database                     |
+| `SELENIUM_VERSION`                | no             | version of selenium               | 3.14          | Version of selenium                              |
+| `ROGO_DOCKER_INNODB_CLUSTER`      | innodb cluster | 0/1                               | 0             | 1 load innodb cluster database configuration     |
+| `ROGO_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446     | port that mysql workbench can use to connect     |
+| `ROGO_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root          | user used to connect to servers                  |
+| `ROGO_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster | version of mysql router to deploy | 8.0           | Required by mysql router                         |
+| `ROGO_MEMCACHED`                  | no             | 0/1                               | 0             | Enables memcached sessions in PHP                |
+| `ROGO_RSERVE`                     | no             | 0/1                               | 1             | Starts rserve                                    |
+| `ROGO_MAIL_PORT`                  | no             | integer                           | 1080          | The port that the mail server will be exposed on |
 
 ## Installing Rogō
 
 Create a settings.xml file in the config directory of Rogō, you can use an example file from this repository, for example settings-innodb.xml.
 
 To ensure that there are no database connection errors when the hosts are started and stopped the settings/server/host value can be set as % this will ensure that the Rogō database users can connect to the database from any server (you should not do this on a production server).
+
+If installing from the git repository you will need to run the following commands:
+
+```bash
+rogo-compose.sh exec -T web npm install
+rogo-compose.sh exec -T web grunt
+```
 
 Now you can install Rogō using the following command:
 

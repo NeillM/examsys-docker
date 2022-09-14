@@ -30,6 +30,11 @@ then
     export ROGO_DOCKER_INNODB_CLUSTER=0
 fi
 
+if [ -z "$ROGO_DOCKER_PHP" ]
+then
+    export ROGO_DOCKER_PHP=latest
+fi
+
 if [ -z "$ROGO_MEMCACHED" ]
 then
     export ROGO_MEMCACHED=0
