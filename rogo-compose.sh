@@ -1,167 +1,134 @@
 #!/usr/bin/env bash
 set -e
 
-if [ ! -d "$ROGO_DOCKER_WWWROOT" ]
+echo rogo-compose.sh and will be removed in the future is deprecated please use examsys-compose.sh instead.
+
+if [ ! -z "$ROGO_DOCKER_WWWROOT" ]
 then
-    echo 'Error: $ROGO_DOCKER_WWWROOT is not set or not an existing directory'
-    exit 1
+    echo ROGO_DOCKER_WWWROOT is deprecated. Please use EXAMSYS_DOCKER_WWWROOT instead.
+    export EXAMSYS_DOCKER_WWWROOT="$ROGO_DOCKER_WWWROOT"
 fi
 
-if [ -z "$ROGO_DOCKER_MYSQLROOT" ]
+if [ ! -z "$ROGO_DOCKER_MYSQLROOT" ]
 then
-    echo 'Error: $ROGO_DOCKER_MYSQLROOT is not set'
-    exit 1
+    echo ROGO_DOCKER_MYSQLROOT is deprecated. Please use EXAMSYS_DOCKER_MYSQLROOT instead.
+    export EXAMSYS_DOCKER_MYSQLROOT="$ROGO_DOCKER_MYSQLROOT"
 fi
 
-dockercompose="docker-compose -f docker-compose.yml"
-
-if [ -z "$ROGO_DOCKER_MYSQLTZ" ]
+if [ ! -z "$ROGO_DOCKER_PHP" ]
 then
-    export ROGO_DOCKER_MYSQLTZ=UTC
+    echo ROGO_DOCKER_PHP is deprecated. Please use EXAMSYS_DOCKER_PHP instead.
+    export EXAMSYS_DOCKER_PHP="$ROGO_DOCKER_PHP"
 fi
 
-if [ -z "$ROGO_DOCKER_CLUSTER" ]
+if [ ! -z "$ROGO_DOCKER_EXPOSE" ]
 then
-    export ROGO_DOCKER_CLUSTER=0
+    echo ROGO_DOCKER_EXPOSE is deprecated. Please use EXAMSYS_DOCKER_EXPOSE instead.
+    export EXAMSYS_DOCKER_EXPOSE="$ROGO_DOCKER_EXPOSE"
 fi
 
-if [ -z "$ROGO_DOCKER_INNODB_CLUSTER" ]
+if [ ! -z "$ROGO_DOCKER_WORKBENCH" ]
 then
-    export ROGO_DOCKER_INNODB_CLUSTER=0
+    echo ROGO_DOCKER_WORKBENCH is deprecated. Please use EXAMSYS_DOCKER_WORKBENCH instead.
+    export EXAMSYS_DOCKER_WORKBENCH="$ROGO_DOCKER_WORKBENCH"
 fi
 
-if [ -z "$ROGO_DOCKER_PHP" ]
+if [ ! -z "$ROGO_DOCKER_WEB_HTTP_PORT" ]
 then
-    export ROGO_DOCKER_PHP=latest
+    echo ROGO_DOCKER_WEB_HTTP_PORT is deprecated. Please use EXAMSYS_DOCKER_WEB_HTTP_PORT instead.
+    export EXAMSYS_DOCKER_WEB_HTTP_PORT="$ROGO_DOCKER_WEB_HTTP_PORT"
 fi
 
-if [ -z "$ROGO_MEMCACHED" ]
+if [ ! -z "$ROGO_DOCKER_WEB_HTTPS_PORT" ]
 then
-    export ROGO_MEMCACHED=0
+    echo ROGO_DOCKER_WEB_HTTPS_PORT is deprecated. Please use EXAMSYS_DOCKER_WEB_HTTPS_PORT instead.
+    export EXAMSYS_DOCKER_WEB_HTTPS_PORT="$ROGO_DOCKER_WEB_HTTPS_PORT"
 fi
 
-if [ -z "$ROGO_RSERVE" ]
+if [ ! -z "$ROGO_DOCKER_SELENIUM" ]
 then
-    export ROGO_RSERVE=1
+    echo ROGO_DOCKER_SELENIUM is deprecated. Please use EXAMSYS_DOCKER_SELENIUM instead.
+    export EXAMSYS_DOCKER_SELENIUM="$ROGO_DOCKER_SELENIUM"
 fi
 
-if [ -z "$ROGO_MAIL_PORT" ]
+if [ ! -z "$ROGO_DOCKER_SELENIUM_DEBUG" ]
 then
-    export ROGO_MAIL_PORT=1080
+    echo ROGO_DOCKER_SELENIUM_DEBUG is deprecated. Please use EXAMSYS_DOCKER_SELENIUM instead.
+    export EXAMSYS_DOCKER_SELENIUM_DEBUG="$ROGO_DOCKER_SELENIUM_DEBUG"
 fi
 
-if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
+if [ ! -z "$ROGO_DOCKER_BROWSERSTACK" ]
 then
-    if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ]
-    then
-        export ROGO_DOCKER_CLUSTERVERSION=7.5
-    fi
-    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
-    then
-        export ROGO_DOCKER_MYSQL_PORT=3306
-    fi
-    dockercompose="${dockercompose} -f cluster.yml"
-elif [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
-then
-    if [ -z "$ROGO_DOCKER_MYSQLVERSION" ]
-    then
-        export ROGO_DOCKER_MYSQLVERSION=8.0
-    fi
-    if [ -z "$ROGO_DOCKER_MYSQL_ROUTERVERSION" ]
-    then
-        export ROGO_DOCKER_MYSQL_ROUTERVERSION=8.0
-    fi
-    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
-    then
-        export ROGO_DOCKER_MYSQL_PORT=6446
-    fi
-    if [ -z "$ROGO_DOCKER_MYSQL_USER" ];
-    then
-        export ROGO_DOCKER_MYSQL_USER=root
-    fi
-    dockercompose="${dockercompose} -f innodb-cluster.yml"
-else
-    if [ -z "$ROGO_DOCKER_MYSQLVERSION" ]
-    then
-        export ROGO_DOCKER_MYSQLVERSION=5.7
-    fi
-    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
-    then
-        export ROGO_DOCKER_MYSQL_PORT=3306
-    fi
-    dockercompose="${dockercompose} -f db.yml"
+    echo ROGO_DOCKER_BROWSERSTACK is deprecated. Please use EXAMSYS_DOCKER_BROWSERSTACK instead.
+    export EXAMSYS_DOCKER_BROWSERSTACK="$ROGO_DOCKER_BROWSERSTACK"
 fi
 
-if [ -n "$ROGO_DOCKER_EXPOSE" ]
+if [ ! -z "$ROGO_DOCKER_CLUSTER" ]
 then
-    if [ -z "$ROGO_DOCKER_WEB_HTTP_PORT" ]
-    then
-        export ROGO_DOCKER_WEB_HTTP_PORT=80
-    fi
-
-    if [ -z "$ROGO_DOCKER_WEB_HTTPS_PORT" ]
-    then
-        export ROGO_DOCKER_WEB_HTTPS_PORT=443
-    fi
+    echo ROGO_DOCKER_CLUSTER is deprecated. Please use EXAMSYS_DOCKER_CLUSTER instead.
+    export EXAMSYS_DOCKER_CLUSTER="$ROGO_DOCKER_CLUSTER"
 fi
 
-if [ -z "$ROGO_DOCKER_WORKBENCH" ]
+if [ ! -z "$ROGO_DOCKER_MYSQLVERSION" ]
 then
-    export ROGO_DOCKER_WORKBENCH=0
+    echo ROGO_DOCKER_MYSQLVERSION is deprecated. Please use EXAMSYS_DOCKER_MYSQLVERSION instead.
+    export EXAMSYS_DOCKER_MYSQLVERSION="$ROGO_DOCKER_MYSQLVERSION"
 fi
 
-if [ -z "$ROGO_DOCKER_SELENIUM" ]
+if [ ! -z "$ROGO_DOCKER_MYSQLTZ" ]
 then
-    export ROGO_DOCKER_SELENIUM=0
+    echo ROGO_DOCKER_MYSQLTZ is deprecated. Please use EXAMSYS_DOCKER_MYSQLTZ instead.
+    export EXAMSYS_DOCKER_MYSQLTZ="$ROGO_DOCKER_MYSQLTZ"
 fi
 
-if [ -z "$ROGO_DOCKER_BROWSERSTACK" ]
+if [ ! -z "$ROGO_DOCKER_CLUSTERVERSION" ]
 then
-    export ROGO_DOCKER_BROWSERSTACK=0
+    echo ROGO_DOCKER_CLUSTERVERSION is deprecated. Please use EXAMSYS_DOCKER_CLUSTERVERSION instead.
+    export EXAMSYS_DOCKER_CLUSTERVERSION="$ROGO_DOCKER_CLUSTERVERSION"
 fi
 
-if [ "$ROGO_DOCKER_EXPOSE" == 1 ]
+if [ ! -z "$ROGO_DOCKER_INNODB_CLUSTER" ]
 then
-    dockercompose="${dockercompose} -f expose.yml"
+    echo ROGO_DOCKER_INNODB_CLUSTER is deprecated. Please use EXAMSYS_DOCKER_INNODB_CLUSTER instead.
+    export EXAMSYS_DOCKER_INNODB_CLUSTER="$ROGO_DOCKER_INNODB_CLUSTER"
 fi
 
-if [ "$ROGO_MEMCACHED" == 1 ]
+if [ ! -z "$ROGO_DOCKER_MYSQL_PORT" ];
 then
-    dockercompose="${dockercompose} -f memcache.yml"
+    echo ROGO_DOCKER_MYSQL_PORT is deprecated. Please use EXAMSYS_DOCKER_MYSQL_PORT instead.
+    export EXAMSYS_DOCKER_MYSQL_PORT="$ROGO_DOCKER_MYSQL_PORT"
 fi
 
-if [ "$ROGO_RSERVE" == 1 ]
+if [ ! -z "$ROGO_DOCKER_MYSQL_USER" ];
 then
-    dockercompose="${dockercompose} -f rserve.yml"
+    echo ROGO_DOCKER_MYSQL_USER is deprecated. Please use EXAMSYS_DOCKER_MYSQL_USER instead.
+    export EXAMSYS_DOCKER_MYSQL_USER="$ROGO_DOCKER_MYSQL_USER"
 fi
 
-if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]
+if [ ! -z "$ROGO_DOCKER_MYSQL_ROUTERVERSION" ]
 then
-    if [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
-    then
-        dockercompose="${dockercompose} -f innodb-cluster-workbench.yml"
-    else
-        dockercompose="${dockercompose} -f workbench.yml"
-    fi
+    echo ROGO_DOCKER_MYSQL_ROUTERVERSION is deprecated. Please use EXAMSYS_DOCKER_MYSQL_ROUTERVERSION instead.
+    export EXAMSYS_DOCKER_MYSQL_ROUTERVERSION="$ROGO_DOCKER_MYSQL_ROUTERVERSION"
 fi
 
-if [ "$ROGO_DOCKER_SELENIUM" == 1 ]
+if [ ! -z "$ROGO_MEMCACHED" ]
 then
-    if [ -z "$SELENIUM_VERSION" ];
-    then
-        export SELENIUM_VERSION=3.141.59
-    fi
-    if [ "$ROGO_DOCKER_SELENIUM_DEBUG" == 1 ]
-    then
-        dockercompose="${dockercompose} -f selenium-debug.yml"
-    else
-        dockercompose="${dockercompose} -f selenium.yml"
-    fi
+    echo ROGO_MEMCACHED is deprecated. Please use EXAMSYS_DOCKER_WWWROOT instead.
+    export EXAMSYS_DOCKER_MEMCACHED="$ROGO_MEMCACHED"
 fi
 
-if [ "$ROGO_DOCKER_BROWSERSTACK" == 1 ]
+if [ ! -z "$ROGO_RSERVE" ]
 then
-    dockercompose="${dockercompose} -f browserstack.yml"
+    echo ROGO_RSERVE is deprecated. Please use EXAMSYS_DOCKER_RSERVE instead.
+    export EXAMSYS_DOCKER_RSERVE="$ROGO_RSERVE"
 fi
 
-$dockercompose $@
+if [ ! -z "$ROGO_MAIL_PORT" ]
+then
+    echo ROGO_MAIL_PORT is deprecated. Please use EXAMSYS_DOCKER_MAIL_PORT instead.
+    export EXAMSYS_DOCKER_MAIL_PORT="$ROGO_MAIL_PORT"
+fi
+
+./examsys-compose.sh "$@"
+
+echo rogo-compose.sh is deprecated and will be removed in the future please use examsys-compose.sh instead.

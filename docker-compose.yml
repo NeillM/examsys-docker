@@ -3,10 +3,10 @@ services:
   web:
     depends_on:
       - db
-    image: uonlearningtech/examsys-php-apache:${ROGO_DOCKER_PHP}
+    image: uonlearningtech/examsys-php-apache:${EXAMSYS_DOCKER_PHP}
     volumes:
-     - "${ROGO_DOCKER_WWWROOT}:/var/www/html"
+     - "${EXAMSYS_DOCKER_WWWROOT}:/var/www/html"
   mail:
     image: dockage/mailcatcher
     ports:
-      - "${ROGO_MAIL_PORT}:1080"
+      - "${EXAMSYS_DOCKER_MAIL_PORT}:1080"
