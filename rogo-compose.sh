@@ -30,24 +30,37 @@ then
     export ROGO_DOCKER_INNODB_CLUSTER=0
 fi
 
+if [ -z "$ROGO_MEMCACHED" ]
+then
+    export ROGO_MEMCACHED=0
+fi
+
+if [ -z "$ROGO_RSERVE" ]
+then
+    export ROGO_RSERVE=1
+fi
+
+if [ -z "$ROGO_MAIL_PORT" ]
+then
+    export ROGO_MAIL_PORT=1080
+fi
+
 if [ "$ROGO_DOCKER_CLUSTER" == 1 ]
 then
-    if [ -z "$ROGO_DOCKER_MYSQLROOT_HOST" ]
-    then
-        echo 'Error: $ROGO_DOCKER_MYSQLROOT_HOST is not set'
-        exit 1
-    fi
     if [ -z "$ROGO_DOCKER_CLUSTERVERSION" ]
     then
         export ROGO_DOCKER_CLUSTERVERSION=7.5
     fi
+    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
+    then
+        export ROGO_DOCKER_MYSQL_PORT=3306
+    fi
     dockercompose="${dockercompose} -f cluster.yml"
 elif [ "$ROGO_DOCKER_INNODB_CLUSTER" == 1 ]
 then
-    if [ -z "$ROGO_DOCKER_MYSQLROOT_HOST" ]
+    if [ -z "$ROGO_DOCKER_MYSQLVERSION" ]
     then
-        echo 'Error: $ROGO_DOCKER_MYSQLROOT_HOST is not set'
-        exit 1
+        export ROGO_DOCKER_MYSQLVERSION=8.0
     fi
     if [ -z "$ROGO_DOCKER_MYSQL_ROUTERVERSION" ]
     then
@@ -66,6 +79,10 @@ else
     if [ -z "$ROGO_DOCKER_MYSQLVERSION" ]
     then
         export ROGO_DOCKER_MYSQLVERSION=5.7
+    fi
+    if [ -z "$ROGO_DOCKER_MYSQL_PORT" ];
+    then
+        export ROGO_DOCKER_MYSQL_PORT=3306
     fi
     dockercompose="${dockercompose} -f db.yml"
 fi
@@ -101,6 +118,16 @@ fi
 if [ "$ROGO_DOCKER_EXPOSE" == 1 ]
 then
     dockercompose="${dockercompose} -f expose.yml"
+fi
+
+if [ "$ROGO_MEMCACHED" == 1 ]
+then
+    dockercompose="${dockercompose} -f memcache.yml"
+fi
+
+if [ "$ROGO_RSERVE" == 1 ]
+then
+    dockercompose="${dockercompose} -f rserve.yml"
 fi
 
 if [ "$ROGO_DOCKER_WORKBENCH" == 1 ]

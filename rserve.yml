@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web:
+    depends_on:
+      - calc
+  calc:
+    image: stevenpollack/docker-rserve

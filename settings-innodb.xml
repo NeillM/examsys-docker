@@ -6,7 +6,7 @@
         <data>/rogodata</data>
         <temp>/tmp/</temp>
         <root></root>
-        <site_address>http://web</site_address>
+        <site_address>https://web</site_address>
     </server>
     <database>
         <prefix>rogo</prefix>

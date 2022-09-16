@@ -1,14 +1,12 @@
 version: '2'
 services:
   web:
+    depends_on:
+      - db
     image: drjosephbaxter/rogo
     volumes:
      - "${ROGO_DOCKER_WWWROOT}:/var/www"
-  cache:
-   image: memcached:1.5
-  calc:
-   image: stevenpollack/docker-rserve
   mail:
     image: dockage/mailcatcher
     ports:
-      - "1080:1080"
+      - "${ROGO_MAIL_PORT}:1080"

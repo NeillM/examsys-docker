@@ -1,0 +1,9 @@
+version: '2'
+services:
+  web:
+    depends_on:
+      - cache
+    volumes:
+      - ./conf/memcache.ini:/usr/local/etc/php/conf.d/memcache.ini
+  cache:
+    image: memcached:1.6-alpine
