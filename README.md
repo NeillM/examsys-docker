@@ -59,7 +59,7 @@ You can change the configuration of the docker images by setting various environ
 |--------------------------------------|----------------|-----------------------------------|---------------|--------------------------------------------------|
 | `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none          | The path to the Rogo codebase you intend to test |
 | `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none          | The root password for your mysql database        |
-| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | latest        | The version of PHP that should be used           |
+| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 7.4           | The version of PHP that should be used           |
 | `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0             | 1 enables webserver port exposure                |
 | `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0             | 1 enables database port exposure                 |
 | `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80            | Host http port for web server                    |
