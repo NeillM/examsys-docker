@@ -4,7 +4,7 @@ services:
     networks:
       - frontend
   ndbmgmt:
-    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
+    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndb_mgmd
     networks:
       cluster:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ./conf/mysql-cluster.cnf:/etc/mysql-cluster.cnf
   ndbnode1:
-    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
+    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -20,7 +20,7 @@ services:
     depends_on:
       - ndbmgmt
   ndbnode2:
-    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
+    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -28,7 +28,7 @@ services:
     depends_on:
       - ndbmgmt
   db:
-    image: mysql/mysql-cluster:${ROGO_DOCKER_CLUSTERVERSION}
+    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: mysqld --default_authentication_plugin=mysql_native_password
     restart: always
     networks:
@@ -36,9 +36,9 @@ services:
       cluster:
         ipv4_address: 192.168.0.10
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
+      MYSQL_ROOT_PASSWORD: ${EXAMSYS_DOCKER_MYSQLROOT}
       MYSQL_ROOT_HOST: "%"
-      TZ: ${ROGO_DOCKER_MYSQLTZ}
+      TZ: ${EXAMSYS_DOCKER_MYSQLTZ}
     depends_on:
       - ndbmgmt
       - ndbnode1

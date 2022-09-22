@@ -4,7 +4,7 @@ services:
     environment:
       MYSQL_ROOT_HOST: "%"
     ports:
-      - "${ROGO_DOCKER_MYSQL_PORT}:6446"
+      - "${EXAMSYS_DOCKER_MYSQL_PORT}:6446"
   mysql-server-1:
     environment:
       MYSQL_ROOT_HOST: "%"
