@@ -12,7 +12,7 @@ Note: These scripts are not fully compatible with the docker-compose command usi
 
 ```bash
 # Set up path to ExamSys code
-export EXAMSYS_DOCKER_WWWROOT=/path/to/rogo/code
+export EXAMSYS_DOCKER_WWWROOT=/path/to/examsys/code
 # Set up mysql root password
 export EXAMSYS_DOCKER_MYSQLROOT=password
 # Expose web server ports
@@ -33,10 +33,10 @@ export EXAMSYS_DOCKER_BROWSERSTACK=0
 export BROWSERSTACK_LOCAL_KEY=key
 
 # Start up containers
-rogo-compose.sh up -d
+examsys-compose.sh up -d
 
 # Shut down and destroy containers
-rogo-compose.sh down
+examsys-compose.sh down
 ```
 
 ## Stop and restart containers
@@ -45,10 +45,10 @@ If you want to use your containers continuously for manual testing or developmen
 
 ```bash
 # Stop containers
-rogo-compose.sh stop
+examsys-compose.sh stop
 
 # Restart containers
-rogo-compose.sh start
+examsys-compose.sh start
 ```
 
 ## Environment variables
@@ -90,14 +90,14 @@ To ensure that there are no database connection errors when the hosts are starte
 If installing from the git repository you will need to run the following commands:
 
 ```bash
-rogo-compose.sh exec -T web npm install
-rogo-compose.sh exec -T web grunt
+examsys-compose.sh exec -T web npm install
+examsys-compose.sh exec -T web grunt
 ```
 
 Now you can install ExamSys using the following command:
 
 ```bash
-rogo-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
+examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
 ```
 
 If you wish to do automatic testing of ExamSys you must install it directly from the git repository, since the community releases do not include the testing code.
@@ -109,7 +109,7 @@ To initialise phpunit you will need to create a phpunit.xml file in the config d
 After installing ExamSys you will now be able to initialise the phpunit database using:
 
 ```bash
-rogo-compose.sh exec -T web php testing/unittest/cli/init.php
+examsys-compose.sh exec -T web php testing/unittest/cli/init.php
 ```
 
 ### Behat
@@ -119,7 +119,7 @@ To initialise phpunit you will need to create a behat.xml file in the config dir
 After installing ExamSys you will be able to initialise the phpunit database using:
 
 ```bash
-rogo-compose.sh exec -T web php testing/behat/cli/init.php
+examsys-compose.sh exec -T web php testing/behat/cli/init.php
 ```
 
 ### Rserve
@@ -145,3 +145,7 @@ You will need to change the following in the ExamSys configuration screen:
 | mailer_port | 1025  |
 
 The web interface to inspect the emails sent by ExamSys is exposed on port 1080
+
+## Also see
+
+* [examsys-php-apache](https://bitbucket.org/examsys/examsys-php-apache)
