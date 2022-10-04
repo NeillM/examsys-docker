@@ -1,14 +1,9 @@
 version: '2'
 services:
-  web:
-    depends_on:
-      - db
-      - cache
-      - calc
   db:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    image: mysql:${ROGO_DOCKER_MYSQLVERSION}
+    image: mysql:${EXAMSYS_DOCKER_MYSQLVERSION}
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROGO_DOCKER_MYSQLROOT}
-      TZ: ${ROGO_DOCKER_MYSQLTZ}
+      MYSQL_ROOT_PASSWORD: ${EXAMSYS_DOCKER_MYSQLROOT}
+      TZ: ${EXAMSYS_DOCKER_MYSQLTZ}

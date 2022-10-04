@@ -4,4 +4,4 @@ services:
    environment:
      MYSQL_ROOT_HOST: "%"
    ports:
-     - "3306:3306"
+     - "${EXAMSYS_DOCKER_MYSQL_PORT}:3306"
