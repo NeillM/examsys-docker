@@ -109,7 +109,13 @@ To initialise phpunit you will need to create a phpunit.xml file in the config d
 After installing ExamSys you will now be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/unittest/cli/init.php
+examsys-compose.sh exec -T web php testing/unittest/cli/init.php --clean
+```
+
+You should then be able to run the tests using:
+
+```bash
+examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
 ```
 
 ### Behat
@@ -119,7 +125,13 @@ To initialise phpunit you will need to create a behat.xml file in the config dir
 After installing ExamSys you will be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/behat/cli/init.php
+examsys-compose.sh exec -T web php testing/behat/cli/init.php --clean
+```
+
+You should then be able to run the tests using:
+
+```bash
+examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
 
 ### Rserve
