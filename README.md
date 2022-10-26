@@ -24,13 +24,11 @@ export EXAMSYS_DOCKER_WEB_HTTPS_PORT=443
 # Expose db port for remote access
 export EXAMSYS_DOCKER_WORKBENCH=0
 # Build Selenium for behat testing
-export EXAMSYS_DOCKER_SELENIUM=0
+export EXAMSYS_DOCKER_SELENIUM=1
 # Setup Selenium in debug mode
 export EXAMSYS_DOCKER_SELENIUM_DEBUG=0
-# Build BrowserStack for behat testing
-export EXAMSYS_DOCKER_BROWSERSTACK=0
-# Your BrowserStack API key
-export BROWSERSTACK_LOCAL_KEY=key
+# Set the database timezone to be the same as the main ExamSys timezone.
+export EXAMSYS_DOCKER_MYSQLTZ=Europe\London
 
 # Start up containers
 examsys-compose.sh up -d
@@ -133,6 +131,15 @@ You should then be able to run the tests using:
 ```bash
 examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
+### Code style checks
+
+To run the coding standards tests to the same level as our automatic tests use:
+
+```bash
+examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
+```
+
+It only reports back errors (this is the minimum level of code style checking you should do when preparing a patch for ExamSys) 
 
 ### Rserve
 
