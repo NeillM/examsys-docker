@@ -3,10 +3,9 @@
 This repository contains Docker configuration aimed at ExamSys developers to easily deploy a testing environment for ExamSys.
 
 This should not be used on a production environment.
-## Prerequisites
-* [Docker](https://docs.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed
 
-Note: These scripts are not fully compatible with the docker-compose command using Docker Compose V2
+## Prerequisites
+* [Docker](https://docs.docker.com) installed
 
 ## Quick start
 
@@ -53,31 +52,32 @@ examsys-compose.sh start
 
 You can change the configuration of the docker images by setting various environment variables before calling `docker-compose up`.
 
-| Environment Variable                 | Mandatory      | Allowed values                    | Default value | Notes                                            |
-|--------------------------------------|----------------|-----------------------------------|---------------|--------------------------------------------------|
-| `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none          | The path to the Rogo codebase you intend to test |
-| `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none          | The root password for your mysql database        |
-| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 7.4           | The version of PHP that should be used           |
-| `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0             | 1 enables webserver port exposure                |
-| `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0             | 1 enables database port exposure                 |
-| `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80            | Host http port for web server                    |
-| `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443           | Host https port for web server                   |
-| `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0             | 1 setup selenium                                 |
-| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0             | 1 debug mode                                     |
-| `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0             | 1 setup browserstack                             |
-| `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none          | Your browserstack API key                        |
-| `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0             | 1 load cluster database configuration            |
-| `EXAMSYS_DOCKER_MYSQLVERSION`        | yes            | version of mysql to deploy        | latest        | Required by mysql database                       |
-| `EXAMSYS_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC           | This to be set to the same as the web service    |
-| `EXAMSYS_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 7.5           | Required by cluster database                     |
-| `SELENIUM_VERSION`                   | no             | version of selenium               | 3.14          | Version of selenium                              |
-| `EXAMSYS_DOCKER_INNODB_CLUSTER`      | innodb cluster | 0/1                               | 0             | 1 load innodb cluster database configuration     |
-| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446     | port that mysql workbench can use to connect     |
-| `EXAMSYS_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root          | user used to connect to servers                  |
-| `EXAMSYS_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster | version of mysql router to deploy | 8.0           | Required by mysql router                         |
-| `EXAMSYS_DOCKER_MEMCACHED`           | no             | 0/1                               | 0             | Enables memcached sessions in PHP                |
-| `EXAMSYS_DOCKER_RSERVE`              | no             | 0/1                               | 1             | Starts rserve                                    |
-| `EXAMSYS_DOCKER_MAIL_PORT`           | no             | integer                           | 1080          | The port that the mail server will be exposed on |
+| Environment Variable                 | Mandatory      | Allowed values                    | Default value  | Notes                                            |
+|--------------------------------------|----------------|-----------------------------------|----------------|--------------------------------------------------|
+| `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none           | The path to the Rogo codebase you intend to test |
+| `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none           | The root password for your mysql database        |
+| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 7.4            | The version of PHP that should be used           |
+| `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0              | 1 enables webserver port exposure                |
+| `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0              | 1 enables database port exposure                 |
+| `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80             | Host http port for web server                    |
+| `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443            | Host https port for web server                   |
+| `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0              | 1 setup selenium                                 |
+| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0              | 1 debug mode                                     |
+| `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0              | 1 setup browserstack                             |
+| `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none           | Your browserstack API key                        |
+| `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0              | 1 load cluster database configuration            |
+| `EXAMSYS_DOCKER_MYSQLVERSION`        | yes            | version of mysql to deploy        | latest         | Required by mysql database                       |
+| `EXAMSYS_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC            | This to be set to the same as the web service    |
+| `EXAMSYS_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 7.5            | Required by cluster database                     |
+| `SELENIUM_VERSION`                   | no             | version of selenium               | 3.14           | Version of selenium                              |
+| `EXAMSYS_DOCKER_INNODB_CLUSTER`      | innodb cluster | 0/1                               | 0              | 1 load innodb cluster database configuration     |
+| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446      | port that mysql workbench can use to connect     |
+| `EXAMSYS_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root           | user used to connect to servers                  |
+| `EXAMSYS_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster | version of mysql router to deploy | 8.0            | Required by mysql router                         |
+| `EXAMSYS_DOCKER_MEMCACHED`           | no             | 0/1                               | 0              | Enables memcached sessions in PHP                |
+| `EXAMSYS_DOCKER_RSERVE`              | no             | 0/1                               | 1              | Starts rserve                                    |
+| `EXAMSYS_DOCKER_MAIL_PORT`           | no             | integer                           | 1080           | The port that the mail server will be exposed on |
+| `EXAMSYS_DOCKER_NAME`                | no             | string                            | examsys-docker | The name of the container set                    |
 
 ## Installing ExamSys
 
