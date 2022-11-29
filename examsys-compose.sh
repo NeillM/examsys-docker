@@ -37,7 +37,7 @@ fi
 
 if [ -z "$EXAMSYS_DOCKER_PHP" ]
 then
-    export EXAMSYS_DOCKER_PHP=7.4
+    export EXAMSYS_DOCKER_PHP=8.1
 fi
 
 if [ -z "$EXAMSYS_DOCKER_MEMCACHED" ]
