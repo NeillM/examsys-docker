@@ -4,4 +4,4 @@ services:
     depends_on:
       - calc
   calc:
-    image: stevenpollack/docker-rserve
+    image: uonlearningtech/examsys-rserve:latest

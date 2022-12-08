@@ -168,3 +168,4 @@ The web interface to inspect the emails sent by ExamSys is exposed on port 1080
 ## Also see
 
 * [examsys-php-apache](https://bitbucket.org/examsys/examsys-php-apache)
+* [examsys-rserve](https://bitbucket.org/examsys/examsys-rserve)
