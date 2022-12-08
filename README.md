@@ -30,10 +30,10 @@ export EXAMSYS_DOCKER_SELENIUM_DEBUG=0
 export EXAMSYS_DOCKER_MYSQLTZ=Europe\London
 
 # Start up containers
-examsys-compose.sh up -d
+./examsys-compose.sh up -d
 
 # Shut down and destroy containers
-examsys-compose.sh down
+./examsys-compose.sh down
 ```
 
 ## Stop and restart containers
@@ -42,10 +42,10 @@ If you want to use your containers continuously for manual testing or developmen
 
 ```bash
 # Stop containers
-examsys-compose.sh stop
+./examsys-compose.sh stop
 
 # Restart containers
-examsys-compose.sh start
+./examsys-compose.sh start
 ```
 
 ## Environment variables
@@ -56,7 +56,7 @@ You can change the configuration of the docker images by setting various environ
 |--------------------------------------|----------------|-----------------------------------|----------------|--------------------------------------------------|
 | `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none           | The path to the Rogo codebase you intend to test |
 | `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none           | The root password for your mysql database        |
-| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 7.4            | The version of PHP that should be used           |
+| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 8.1            | The version of PHP that should be used           |
 | `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0              | 1 enables webserver port exposure                |
 | `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0              | 1 enables database port exposure                 |
 | `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80             | Host http port for web server                    |
@@ -88,14 +88,14 @@ To ensure that there are no database connection errors when the hosts are starte
 If installing from the git repository you will need to run the following commands:
 
 ```bash
-examsys-compose.sh exec -T web npm install
-examsys-compose.sh exec -T web grunt
+./examsys-compose.sh exec -T web npm install
+./examsys-compose.sh exec -T web grunt
 ```
 
 Now you can install ExamSys using the following command:
 
 ```bash
-examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
+./examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
 ```
 
 If you wish to do automatic testing of ExamSys you must install it directly from the git repository, since the community releases do not include the testing code.
@@ -107,13 +107,13 @@ To initialise phpunit you will need to create a phpunit.xml file in the config d
 After installing ExamSys you will now be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/unittest/cli/init.php --clean
+./examsys-compose.sh exec -T web php testing/unittest/cli/init.php --clean
 ```
 
 You should then be able to run the tests using:
 
 ```bash
-examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
+./examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
 ```
 
 ### Behat
@@ -123,20 +123,20 @@ To initialise phpunit you will need to create a behat.xml file in the config dir
 After installing ExamSys you will be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/behat/cli/init.php --clean
+./examsys-compose.sh exec -T web php testing/behat/cli/init.php --clean
 ```
 
 You should then be able to run the tests using:
 
 ```bash
-examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
+./examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
 
 ```bash
-examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
+./examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
 ```
 
 It only reports back errors (this is the minimum level of code style checking you should do when preparing a patch for ExamSys) 
