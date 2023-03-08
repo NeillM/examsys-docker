@@ -13,7 +13,12 @@ then
     exit 1
 fi
 
-dockercompose="docker-compose -f docker-compose.yml"
+if [ -z "$EXAMSYS_DOCKER_NAME" ]
+then
+    export EXAMSYS_DOCKER_NAME=examsys-docker
+fi
+
+dockercompose="docker compose -p $EXAMSYS_DOCKER_NAME -f docker-compose.yml"
 
 if [ -z "$EXAMSYS_DOCKER_MYSQLTZ" ]
 then
@@ -32,7 +37,7 @@ fi
 
 if [ -z "$EXAMSYS_DOCKER_PHP" ]
 then
-    export EXAMSYS_DOCKER_PHP=7.4
+    export EXAMSYS_DOCKER_PHP=8.1
 fi
 
 if [ -z "$EXAMSYS_DOCKER_MEMCACHED" ]

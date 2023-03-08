@@ -3,10 +3,9 @@
 This repository contains Docker configuration aimed at ExamSys developers to easily deploy a testing environment for ExamSys.
 
 This should not be used on a production environment.
-## Prerequisites
-* [Docker](https://docs.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed
 
-Note: These scripts are not fully compatible with the docker-compose command using Docker Compose V2
+## Prerequisites
+* [Docker](https://docs.docker.com) installed
 
 ## Quick start
 
@@ -31,10 +30,10 @@ export EXAMSYS_DOCKER_SELENIUM_DEBUG=0
 export EXAMSYS_DOCKER_MYSQLTZ=Europe\London
 
 # Start up containers
-examsys-compose.sh up -d
+./examsys-compose.sh up -d
 
 # Shut down and destroy containers
-examsys-compose.sh down
+./examsys-compose.sh down
 ```
 
 ## Stop and restart containers
@@ -43,41 +42,42 @@ If you want to use your containers continuously for manual testing or developmen
 
 ```bash
 # Stop containers
-examsys-compose.sh stop
+./examsys-compose.sh stop
 
 # Restart containers
-examsys-compose.sh start
+./examsys-compose.sh start
 ```
 
 ## Environment variables
 
 You can change the configuration of the docker images by setting various environment variables before calling `docker-compose up`.
 
-| Environment Variable                 | Mandatory      | Allowed values                    | Default value | Notes                                            |
-|--------------------------------------|----------------|-----------------------------------|---------------|--------------------------------------------------|
-| `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none          | The path to the Rogo codebase you intend to test |
-| `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none          | The root password for your mysql database        |
-| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 7.4           | The version of PHP that should be used           |
-| `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0             | 1 enables webserver port exposure                |
-| `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0             | 1 enables database port exposure                 |
-| `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80            | Host http port for web server                    |
-| `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443           | Host https port for web server                   |
-| `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0             | 1 setup selenium                                 |
-| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0             | 1 debug mode                                     |
-| `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0             | 1 setup browserstack                             |
-| `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none          | Your browserstack API key                        |
-| `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0             | 1 load cluster database configuration            |
-| `EXAMSYS_DOCKER_MYSQLVERSION`        | yes            | version of mysql to deploy        | latest        | Required by mysql database                       |
-| `EXAMSYS_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC           | This to be set to the same as the web service    |
-| `EXAMSYS_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 7.5           | Required by cluster database                     |
-| `SELENIUM_VERSION`                   | no             | version of selenium               | 3.14          | Version of selenium                              |
-| `EXAMSYS_DOCKER_INNODB_CLUSTER`      | innodb cluster | 0/1                               | 0             | 1 load innodb cluster database configuration     |
-| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446     | port that mysql workbench can use to connect     |
-| `EXAMSYS_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root          | user used to connect to servers                  |
-| `EXAMSYS_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster | version of mysql router to deploy | 8.0           | Required by mysql router                         |
-| `EXAMSYS_DOCKER_MEMCACHED`           | no             | 0/1                               | 0             | Enables memcached sessions in PHP                |
-| `EXAMSYS_DOCKER_RSERVE`              | no             | 0/1                               | 1             | Starts rserve                                    |
-| `EXAMSYS_DOCKER_MAIL_PORT`           | no             | integer                           | 1080          | The port that the mail server will be exposed on |
+| Environment Variable                 | Mandatory      | Allowed values                    | Default value  | Notes                                            |
+|--------------------------------------|----------------|-----------------------------------|----------------|--------------------------------------------------|
+| `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none           | The path to the Rogo codebase you intend to test |
+| `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none           | The root password for your mysql database        |
+| `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 8.1            | The version of PHP that should be used           |
+| `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0              | 1 enables webserver port exposure                |
+| `EXAMSYS_DOCKER_WORKBENCH`           | no             | 0/1                               | 0              | 1 enables database port exposure                 |
+| `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80             | Host http port for web server                    |
+| `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443            | Host https port for web server                   |
+| `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0              | 1 setup selenium                                 |
+| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0              | 1 debug mode                                     |
+| `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0              | 1 setup browserstack                             |
+| `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none           | Your browserstack API key                        |
+| `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0              | 1 load cluster database configuration            |
+| `EXAMSYS_DOCKER_MYSQLVERSION`        | yes            | version of mysql to deploy        | latest         | Required by mysql database                       |
+| `EXAMSYS_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC            | This to be set to the same as the web service    |
+| `EXAMSYS_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 7.5            | Required by cluster database                     |
+| `SELENIUM_VERSION`                   | no             | version of selenium               | 3.14           | Version of selenium                              |
+| `EXAMSYS_DOCKER_INNODB_CLUSTER`      | innodb cluster | 0/1                               | 0              | 1 load innodb cluster database configuration     |
+| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446      | port that mysql workbench can use to connect     |
+| `EXAMSYS_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root           | user used to connect to servers                  |
+| `EXAMSYS_DOCKER_MYSQL_ROUTERVERSION` | innodb cluster | version of mysql router to deploy | 8.0            | Required by mysql router                         |
+| `EXAMSYS_DOCKER_MEMCACHED`           | no             | 0/1                               | 0              | Enables memcached sessions in PHP                |
+| `EXAMSYS_DOCKER_RSERVE`              | no             | 0/1                               | 1              | Starts rserve                                    |
+| `EXAMSYS_DOCKER_MAIL_PORT`           | no             | integer                           | 1080           | The port that the mail server will be exposed on |
+| `EXAMSYS_DOCKER_NAME`                | no             | string                            | examsys-docker | The name of the container set                    |
 
 ## Installing ExamSys
 
@@ -88,14 +88,14 @@ To ensure that there are no database connection errors when the hosts are starte
 If installing from the git repository you will need to run the following commands:
 
 ```bash
-examsys-compose.sh exec -T web npm install
-examsys-compose.sh exec -T web grunt
+./examsys-compose.sh exec -T web npm install
+./examsys-compose.sh exec -T web grunt
 ```
 
 Now you can install ExamSys using the following command:
 
 ```bash
-examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
+./examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
 ```
 
 If you wish to do automatic testing of ExamSys you must install it directly from the git repository, since the community releases do not include the testing code.
@@ -107,13 +107,13 @@ To initialise phpunit you will need to create a phpunit.xml file in the config d
 After installing ExamSys you will now be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/unittest/cli/init.php --clean
+./examsys-compose.sh exec -T web php testing/unittest/cli/init.php --clean
 ```
 
 You should then be able to run the tests using:
 
 ```bash
-examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
+./examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
 ```
 
 ### Behat
@@ -123,20 +123,20 @@ To initialise phpunit you will need to create a behat.xml file in the config dir
 After installing ExamSys you will be able to initialise the phpunit database using:
 
 ```bash
-examsys-compose.sh exec -T web php testing/behat/cli/init.php --clean
+./examsys-compose.sh exec -T web php testing/behat/cli/init.php --clean
 ```
 
 You should then be able to run the tests using:
 
 ```bash
-examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
+./examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
 
 ```bash
-examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
+./examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
 ```
 
 It only reports back errors (this is the minimum level of code style checking you should do when preparing a patch for ExamSys) 
@@ -168,3 +168,4 @@ The web interface to inspect the emails sent by ExamSys is exposed on port 1080
 ## Also see
 
 * [examsys-php-apache](https://bitbucket.org/examsys/examsys-php-apache)
+* [examsys-rserve](https://bitbucket.org/examsys/examsys-rserve)
