@@ -165,6 +165,14 @@ You will need to change the following in the ExamSys configuration screen:
 
 The web interface to inspect the emails sent by ExamSys is exposed on port 1080
 
+## Updating ExamSys
+
+You can run in updates via the command line using:
+
+```bash
+./examsys-compose.sh exec -T web php cli/upd.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -o1 -q1
+```
+
 ## Also see
 
 * [examsys-php-apache](https://bitbucket.org/examsys/examsys-php-apache)
