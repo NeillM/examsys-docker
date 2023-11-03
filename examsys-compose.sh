@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+# First find out if this was called from symlink,
+# then find the real path of parent directory.
+# This is needed because macOS does not have GNU realpath.
+thisfile=$( readlink "${BASH_SOURCE[0]}" ) || thisfile="${BASH_SOURCE[0]}"
+basedir="$( cd "$( dirname "$thisfile" )" && pwd -P )"
+
 if [ ! -d "$EXAMSYS_DOCKER_WWWROOT" ]
 then
     echo 'Error: $EXAMSYS_DOCKER_WWWROOT is not set or not an existing directory'
@@ -23,7 +29,7 @@ then
     export EXAMSYS_DOCKER_NAME=examsys-docker
 fi
 
-dockercompose="docker compose -p $EXAMSYS_DOCKER_NAME -f docker-compose.yml"
+dockercompose="docker compose -p $EXAMSYS_DOCKER_NAME -f ${basedir}/docker-compose.yml"
 
 if [ -z "$EXAMSYS_DOCKER_MYSQLTZ" ]
 then
@@ -70,7 +76,7 @@ then
     then
         export EXAMSYS_DOCKER_MYSQL_PORT=3306
     fi
-    dockercompose="${dockercompose} -f cluster.yml"
+    dockercompose="${dockercompose} -f ${basedir}/cluster.yml"
 elif [ "$EXAMSYS_DOCKER_INNODB_CLUSTER" == 1 ]
 then
     if [ -z "$EXAMSYS_DOCKER_MYSQLVERSION" ]
@@ -89,7 +95,7 @@ then
     then
         export EXAMSYS_DOCKER_MYSQL_USER=root
     fi
-    dockercompose="${dockercompose} -f innodb-cluster.yml"
+    dockercompose="${dockercompose} -f ${basedir}/innodb-cluster.yml"
 else
     if [ -z "$EXAMSYS_DOCKER_MYSQLVERSION" ]
     then
@@ -99,7 +105,7 @@ else
     then
         export EXAMSYS_DOCKER_MYSQL_PORT=3306
     fi
-    dockercompose="${dockercompose} -f db.yml"
+    dockercompose="${dockercompose} -f ${basedir}/db.yml"
 fi
 
 if [ -n "$EXAMSYS_DOCKER_EXPOSE" ]
@@ -132,26 +138,26 @@ fi
 
 if [ "$EXAMSYS_DOCKER_EXPOSE" == 1 ]
 then
-    dockercompose="${dockercompose} -f expose.yml"
+    dockercompose="${dockercompose} -f ${basedir}/expose.yml"
 fi
 
 if [ "$EXAMSYS_DOCKER_MEMCACHED" == 1 ]
 then
-    dockercompose="${dockercompose} -f memcache.yml"
+    dockercompose="${dockercompose} -f ${basedir}/memcache.yml"
 fi
 
 if [ "$EXAMSYS_DOCKER_RSERVE" == 1 ]
 then
-    dockercompose="${dockercompose} -f rserve.yml"
+    dockercompose="${dockercompose} -f ${basedir}/rserve.yml"
 fi
 
 if [ "$EXAMSYS_DOCKER_WORKBENCH" == 1 ]
 then
     if [ "$EXAMSYS_DOCKER_INNODB_CLUSTER" == 1 ]
     then
-        dockercompose="${dockercompose} -f innodb-cluster-workbench.yml"
+        dockercompose="${dockercompose} -f ${basedir}/innodb-cluster-workbench.yml"
     else
-        dockercompose="${dockercompose} -f workbench.yml"
+        dockercompose="${dockercompose} -f ${basedir}/workbench.yml"
     fi
 fi
 
@@ -163,20 +169,20 @@ then
     fi
     if [ -z "$EXAMSYS_DOCKER_SELENIUM_VNC_PORT" ]
     then
-        dockercompose="${dockercompose} -f selenium.yml"
+        dockercompose="${dockercompose} -f ${basedir}/selenium.yml"
     else
-        dockercompose="${dockercompose} -f selenium-debug.yml"
+        dockercompose="${dockercompose} -f ${basedir}/selenium-debug.yml"
     fi
 fi
 
 if [ "$EXAMSYS_DOCKER_BROWSERSTACK" == 1 ]
 then
-    dockercompose="${dockercompose} -f browserstack.yml"
+    dockercompose="${dockercompose} -f ${basedir}/browserstack.yml"
 fi
 
 if [ -d "$EXAMSYS_DOCKER_FAILDUMP" ]
 then
-  dockercompose="${dockercompose} -f faildump.yml"
+  dockercompose="${dockercompose} -f ${basedir}/faildump.yml"
 fi
 
 $dockercompose $@
