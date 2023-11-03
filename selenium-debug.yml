@@ -3,6 +3,9 @@ services:
   selenium:
     image: selenium/standalone-chrome-debug:${SELENIUM_VERSION}
     ports:
-      - "5900:5900"
+      - "${EXAMSYS_DOCKER_SELENIUM_VNC_PORT}:5900"
+    environment:
+      # Workaround for https://github.com/SeleniumHQ/docker-selenium/issues/227
+      "no_proxy": localhost
     volumes:
     - /dev/shm:/dev/shm

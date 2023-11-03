@@ -156,11 +156,11 @@ then
     then
         export SELENIUM_VERSION=3.141.59
     fi
-    if [ "$EXAMSYS_DOCKER_SELENIUM_DEBUG" == 1 ]
+    if [ -z "$EXAMSYS_DOCKER_SELENIUM_VNC_PORT" ]
     then
-        dockercompose="${dockercompose} -f selenium-debug.yml"
-    else
         dockercompose="${dockercompose} -f selenium.yml"
+    else
+        dockercompose="${dockercompose} -f selenium-debug.yml"
     fi
 fi
 

@@ -63,7 +63,7 @@ You can change the configuration of the docker images by setting various environ
 | `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80             | Host http port for web server                    |
 | `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443            | Host https port for web server                   |
 | `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0              | 1 setup selenium                                 |
-| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0              | 1 debug mode                                     |
+| `EXAMSYS_DOCKER_SELENIUM_VNC_PORT`   | no             | integer                           | 0              | Port number for VNC                              |
 | `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0              | 1 setup browserstack                             |
 | `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none           | Your browserstack API key                        |
 | `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0              | 1 load cluster database configuration            |
@@ -132,6 +132,15 @@ You should then be able to run the tests using:
 ```bash
 ./examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
+
+#### Viewing running behat tests
+
+It is possible to view any @javascript behat tests that are running using VNC. To do this you need to configure a port for VNC, for example:
+```bash
+export EXAMSYS_DOCKER_SELENIUM_VNC_PORT=5900
+```
+Then after you bring up examsys-docker you will be able to connect to localhost:5900 using the password *secret* using a VNC client. 
+
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
