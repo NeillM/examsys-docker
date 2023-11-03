@@ -169,4 +169,9 @@ then
     dockercompose="${dockercompose} -f browserstack.yml"
 fi
 
+if [ -d "$EXAMSYS_DOCKER_FAILDUMP" ]
+then
+  dockercompose="${dockercompose} -f faildump.yml"
+fi
+
 $dockercompose $@

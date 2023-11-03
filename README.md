@@ -55,6 +55,7 @@ You can change the configuration of the docker images by setting various environ
 | Environment Variable                 | Mandatory      | Allowed values                    | Default value  | Notes                                            |
 |--------------------------------------|----------------|-----------------------------------|----------------|--------------------------------------------------|
 | `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none           | The path to the Rogo codebase you intend to test |
+| `EXAMSYS_DOCKER_FAILDUMP`            | no             | path on your file system          | none           | The path you want faildumps to be stored locally |
 | `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none           | The root password for your mysql database        |
 | `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 8.1            | The version of PHP that should be used           |
 | `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0              | 1 enables webserver port exposure                |
@@ -134,7 +135,7 @@ You should then be able to run the tests using:
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
-
+[phpunit-innodb.xml](phpunit-innodb.xml)
 ```bash
 ./examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
 ```
