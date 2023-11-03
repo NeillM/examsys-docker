@@ -135,7 +135,6 @@ You should then be able to run the tests using:
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
-[phpunit-innodb.xml](phpunit-innodb.xml)
 ```bash
 ./examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
 ```
