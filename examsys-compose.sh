@@ -13,6 +13,11 @@ then
     exit 1
 fi
 
+if [ ! -z "$EXAMSYS_DOCKER_SELENIUM_DEBUG" ]
+then
+  echo 'Warning: $EXAMSYS_DOCKER_SELENIUM_DEBUG is no longer used, you should now define a port for VNC using EXAMSYS_DOCKER_SELENIUM_VNC_PORT'
+fi
+
 if [ -z "$EXAMSYS_DOCKER_NAME" ]
 then
     export EXAMSYS_DOCKER_NAME=examsys-docker

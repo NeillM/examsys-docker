@@ -24,8 +24,6 @@ export EXAMSYS_DOCKER_WEB_HTTPS_PORT=443
 export EXAMSYS_DOCKER_WORKBENCH=0
 # Build Selenium for behat testing
 export EXAMSYS_DOCKER_SELENIUM=1
-# Setup Selenium in debug mode
-export EXAMSYS_DOCKER_SELENIUM_DEBUG=0
 # Set the database timezone to be the same as the main ExamSys timezone.
 export EXAMSYS_DOCKER_MYSQLTZ=Europe\London
 
