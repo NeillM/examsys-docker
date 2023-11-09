@@ -97,6 +97,8 @@ Now you can install ExamSys using the following command:
 ./examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
 ```
 
+You may also need to either manually run composer or initialise Behat to finish making ExamSys usable if you downloaded it directly from the repository. 
+
 If you wish to do automatic testing of ExamSys you must install it directly from the git repository, since the community releases do not include the testing code.
 
 ### Phpunit
