@@ -24,8 +24,6 @@ export EXAMSYS_DOCKER_WEB_HTTPS_PORT=443
 export EXAMSYS_DOCKER_WORKBENCH=0
 # Build Selenium for behat testing
 export EXAMSYS_DOCKER_SELENIUM=1
-# Setup Selenium in debug mode
-export EXAMSYS_DOCKER_SELENIUM_DEBUG=0
 # Set the database timezone to be the same as the main ExamSys timezone.
 export EXAMSYS_DOCKER_MYSQLTZ=Europe\London
 
@@ -55,6 +53,7 @@ You can change the configuration of the docker images by setting various environ
 | Environment Variable                 | Mandatory      | Allowed values                    | Default value  | Notes                                            |
 |--------------------------------------|----------------|-----------------------------------|----------------|--------------------------------------------------|
 | `EXAMSYS_DOCKER_WWWROOT`             | yes            | path on your file system          | none           | The path to the Rogo codebase you intend to test |
+| `EXAMSYS_DOCKER_FAILDUMP`            | no             | path on your file system          | none           | The path you want faildumps to be stored locally |
 | `EXAMSYS_DOCKER_MYSQLROOT`           | yes            | string                            | none           | The root password for your mysql database        |
 | `EXAMSYS_DOCKER_PHP`                 | no             | latest, 7.4, 8.0, 8.1             | 8.1            | The version of PHP that should be used           |
 | `EXAMSYS_DOCKER_EXPOSE`              | no             | 0/1                               | 0              | 1 enables webserver port exposure                |
@@ -62,7 +61,7 @@ You can change the configuration of the docker images by setting various environ
 | `EXAMSYS_DOCKER_WEB_HTTP_PORT`       | yes            | integer                           | 80             | Host http port for web server                    |
 | `EXAMSYS_DOCKER_WEB_HTTPS_PORT`      | yes            | integer                           | 443            | Host https port for web server                   |
 | `EXAMSYS_DOCKER_SELENIUM`            | no             | 0/1                               | 0              | 1 setup selenium                                 |
-| `EXAMSYS_DOCKER_SELENIUM_DEBUG`      | no             | 0/1                               | 0              | 1 debug mode                                     |
+| `EXAMSYS_DOCKER_SELENIUM_VNC_PORT`   | no             | integer                           | 0              | Port number for VNC                              |
 | `EXAMSYS_DOCKER_BROWSERSTACK`        | no             | 0/1                               | 0              | 1 setup browserstack                             |
 | `BROWSERSTACK_LOCAL_KEY`             | no             | string                            | none           | Your browserstack API key                        |
 | `EXAMSYS_DOCKER_CLUSTER`             | ndb cluster    | 0/1                               | 0              | 1 load cluster database configuration            |
@@ -98,6 +97,8 @@ Now you can install ExamSys using the following command:
 ./examsys-compose.sh exec -T web php cli/init.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -s db -t 3306 -n examsys
 ```
 
+You may also need to either manually run composer or initialise Behat to finish making ExamSys usable if you downloaded it directly from the repository. 
+
 If you wish to do automatic testing of ExamSys you must install it directly from the git repository, since the community releases do not include the testing code.
 
 ### Phpunit
@@ -131,10 +132,18 @@ You should then be able to run the tests using:
 ```bash
 ./examsys-compose.sh exec -T web vendor/bin/behat --config testing/behat/config/behat.yml
 ```
+
+#### Viewing running behat tests
+
+It is possible to view any @javascript behat tests that are running using VNC. To do this you need to configure a port for VNC, for example:
+```bash
+export EXAMSYS_DOCKER_SELENIUM_VNC_PORT=5900
+```
+Then after you bring up examsys-docker you will be able to connect to localhost:5900 using the password *secret* using a VNC client. 
+
 ### Code style checks
 
 To run the coding standards tests to the same level as our automatic tests use:
-
 ```bash
 ./examsys-compose.sh exec -T web vendor/squizlabs/php_codesniffer/bin/phpcs --standard=testing/codesniffer/Rogo/ruleset.xml -n .
 ```
