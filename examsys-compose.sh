@@ -48,7 +48,7 @@ fi
 
 if [ -z "$EXAMSYS_DOCKER_PHP" ]
 then
-    export EXAMSYS_DOCKER_PHP=8.1
+    export EXAMSYS_DOCKER_PHP=8.3
 fi
 
 if [ -z "$EXAMSYS_DOCKER_MEMCACHED" ]
@@ -70,7 +70,7 @@ if [ "$EXAMSYS_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$EXAMSYS_DOCKER_CLUSTERVERSION" ]
     then
-        export EXAMSYS_DOCKER_CLUSTERVERSION=7.5
+        export EXAMSYS_DOCKER_CLUSTERVERSION=8.0
     fi
     if [ -z "$EXAMSYS_DOCKER_MYSQL_PORT" ];
     then
@@ -99,7 +99,7 @@ then
 else
     if [ -z "$EXAMSYS_DOCKER_MYSQLVERSION" ]
     then
-        export EXAMSYS_DOCKER_MYSQLVERSION=5.7
+        export EXAMSYS_DOCKER_MYSQLVERSION=8.4
     fi
     if [ -z "$EXAMSYS_DOCKER_MYSQL_PORT" ];
     then

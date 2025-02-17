@@ -19,8 +19,7 @@ services:
       "--transaction_write_set_extraction=XXHASH64",
       "--user=root",
       "--skip-host-cache",
-      "--skip-name-resolve",
-      "--default_authentication_plugin=mysql_native_password"
+      "--skip-name-resolve"
     ]
   mysql-server-2:
     image: mysql/mysql-server:${EXAMSYS_DOCKER_MYSQLVERSION}
@@ -41,8 +40,7 @@ services:
       "--transaction_write_set_extraction=XXHASH64",
       "--user=root",
       "--skip-host-cache",
-      "--skip-name-resolve",
-      "--default_authentication_plugin=mysql_native_password"
+      "--skip-name-resolve"
     ]
   mysql-server-3:
     image: mysql/mysql-server:${EXAMSYS_DOCKER_MYSQLVERSION}
@@ -63,8 +61,7 @@ services:
       "--transaction_write_set_extraction=XXHASH64",
       "--user=root",
       "--skip-host-cache",
-      "--skip-name-resolve",
-      "--default_authentication_plugin=mysql_native_password"
+      "--skip-name-resolve"
     ]
   mysql-shell:
     image: bkandasa/mysql-shell-batch
