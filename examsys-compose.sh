@@ -77,25 +77,6 @@ then
         export EXAMSYS_DOCKER_MYSQL_PORT=3306
     fi
     dockercompose="${dockercompose} -f ${basedir}/cluster.yml"
-elif [ "$EXAMSYS_DOCKER_INNODB_CLUSTER" == 1 ]
-then
-    if [ -z "$EXAMSYS_DOCKER_MYSQLVERSION" ]
-    then
-        export EXAMSYS_DOCKER_MYSQLVERSION=8.0
-    fi
-    if [ -z "$EXAMSYS_DOCKER_MYSQL_ROUTERVERSION" ]
-    then
-        export EXAMSYS_DOCKER_MYSQL_ROUTERVERSION=8.0
-    fi
-    if [ -z "$EXAMSYS_DOCKER_MYSQL_PORT" ];
-    then
-        export EXAMSYS_DOCKER_MYSQL_PORT=6446
-    fi
-    if [ -z "$EXAMSYS_DOCKER_MYSQL_USER" ];
-    then
-        export EXAMSYS_DOCKER_MYSQL_USER=root
-    fi
-    dockercompose="${dockercompose} -f ${basedir}/innodb-cluster.yml"
 else
     if [ -z "$EXAMSYS_DOCKER_MYSQLVERSION" ]
     then
@@ -153,12 +134,7 @@ fi
 
 if [ "$EXAMSYS_DOCKER_WORKBENCH" == 1 ]
 then
-    if [ "$EXAMSYS_DOCKER_INNODB_CLUSTER" == 1 ]
-    then
-        dockercompose="${dockercompose} -f ${basedir}/innodb-cluster-workbench.yml"
-    else
-        dockercompose="${dockercompose} -f ${basedir}/workbench.yml"
-    fi
+    dockercompose="${dockercompose} -f ${basedir}/workbench.yml"
 fi
 
 if [ "$EXAMSYS_DOCKER_SELENIUM" == 1 ]
