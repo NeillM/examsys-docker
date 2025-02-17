@@ -1,4 +1,3 @@
-version: '2'
 services:
   mysql-server-1:
     image: mysql/mysql-server:${EXAMSYS_DOCKER_MYSQLVERSION}
