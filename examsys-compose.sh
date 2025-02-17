@@ -70,7 +70,7 @@ if [ "$EXAMSYS_DOCKER_CLUSTER" == 1 ]
 then
     if [ -z "$EXAMSYS_DOCKER_CLUSTERVERSION" ]
     then
-        export EXAMSYS_DOCKER_CLUSTERVERSION=8.0
+        export EXAMSYS_DOCKER_CLUSTERVERSION=8.4
     fi
     if [ -z "$EXAMSYS_DOCKER_MYSQL_PORT" ];
     then

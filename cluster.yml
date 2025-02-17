@@ -3,7 +3,7 @@ services:
     networks:
       - frontend
   ndbmgmt:
-    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
+    image: container-registry.oracle.com/mysql/community-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndb_mgmd
     networks:
       cluster:
@@ -11,7 +11,7 @@ services:
     volumes:
       - ./conf/mysql-cluster.cnf:/etc/mysql-cluster.cnf
   ndbnode1:
-    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
+    image: container-registry.oracle.com/mysql/community-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - ndbmgmt
   ndbnode2:
-    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
+    image: container-registry.oracle.com/mysql/community-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     command: ndbd
     networks:
       cluster:
@@ -27,8 +27,7 @@ services:
     depends_on:
       - ndbmgmt
   db:
-    image: mysql/mysql-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
-    command: mysqld --default_authentication_plugin=mysql_native_password
+    image: container-registry.oracle.com/mysql/community-cluster:${EXAMSYS_DOCKER_CLUSTERVERSION}
     networks:
       frontend:
       cluster:
