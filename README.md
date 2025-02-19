@@ -69,7 +69,7 @@ You can change the configuration of the docker images by setting various environ
 | `EXAMSYS_DOCKER_MYSQLTZ`             | yes            | default timezone of db            | UTC            | This to be set to the same as the web service    |
 | `EXAMSYS_DOCKER_CLUSTERVERSION`      | ndb cluster    | version of cluster to deploy      | 8.4            | Required by cluster database                     |
 | `SELENIUM_VERSION`                   | no             | version of selenium               | 3.14           | Version of selenium                              |
-| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306/6446      | port that mysql workbench can use to connect     |
+| `EXAMSYS_DOCKER_MYSQL_PORT`          | no             | integer                           | 3306           | port that mysql workbench can use to connect     |
 | `EXAMSYS_DOCKER_MYSQL_USER`          | innodb cluster | string                            | root           | user used to connect to servers                  |
 | `EXAMSYS_DOCKER_MEMCACHED`           | no             | 0/1                               | 0              | Enables memcached sessions in PHP                |
 | `EXAMSYS_DOCKER_RSERVE`              | no             | 0/1                               | 1              | Starts rserve                                    |
