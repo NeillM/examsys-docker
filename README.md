@@ -182,6 +182,13 @@ You can run in updates via the command line using:
 ./examsys-compose.sh exec -T web php cli/upd.php -u root -p $EXAMSYS_DOCKER_MYSQLROOT -o1 -q1
 ```
 
+## XDebug
+
+The web server is configured with XDebug you should be able to access it to do debugging using your favorite IDE
+if you are running the instance on your local machine.
+
+* IDE key: examsys
+
 ## Also see
 
 * [examsys-php-apache](https://bitbucket.org/examsys/examsys-php-apache)
