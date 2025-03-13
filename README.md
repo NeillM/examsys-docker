@@ -115,6 +115,8 @@ You should then be able to run the tests using:
 ./examsys-compose.sh exec -T web vendor/bin/phpunit -c testing/unittest/config/phpunit.xml
 ```
 
+For a complete list of PHPUnit command line options, see the [PHPUnit documentation](https://docs.phpunit.de/en/9.6/textui.html).
+
 ### Behat
 
 To initialise phpunit you will need to create a behat.xml file in the config directory, you can use an example file from this repository as a base for this behat-innodb.xml (The database password in it will need modifying)
