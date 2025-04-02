@@ -150,6 +150,15 @@ To run the coding standards tests to the same level as our automatic tests use:
 
 It only reports back errors (this is the minimum level of code style checking you should do when preparing a patch for ExamSys) 
 
+### Rector
+
+We use Rector for automatically refactoring parts of ExamSys when moving between version of PHP. When you add code to ExamSys it must be written in a way that does not cause Rector to make changes.
+
+To see if Rector will make changes run:
+```bash
+./examsys-compose.sh exec -T web vendor/bin/rector process --dry-run
+```
+
 ### Rserve
 
 If you wish to use Rserve as your maths engine you will need to change the following in the ExamSys configuration screen:
