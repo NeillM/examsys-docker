@@ -45,15 +45,6 @@ services:
       - ndbmgmt
       - ndbnode1
       - ndbnode2
-  cache:
-    networks:
-      - frontend
-  calc:
-    networks:
-      - frontend
-  selenium:
-    networks:
-      - frontend
 networks:
   frontend:
     driver: bridge
