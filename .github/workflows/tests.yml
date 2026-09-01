@@ -55,7 +55,7 @@ jobs:
         run: |
           cp docker/settings-innodb.xml examsys/config/settings.xml
           cp docker/phpunit-innodb.xml examsys/config/phpunit.xml
-          sed -i 's/<!-- Replace with the password you set in EXAMSYS_DOCKER_MYSQLROOT -->/test/g' examsys/config/phpunit.xml
+          sed -i 's/<!-- Replace with the password you set in EXAMSYS_DOCKER_MYSQLROOT -->/${{ env.EXAMSYS_DOCKER_MYSQLROOT }}/g' examsys/config/phpunit.xml
 
       - name: Start ExamSys docker instance
         run: docker/examsys-compose.sh up -d
